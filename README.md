@@ -112,7 +112,7 @@ All registers are set to 0. This has the effect of moving the execution of the p
 Swap registers.
 
 The exact action depends on the last two bits:
-- 00, 01, or 02: `ACC` is switched with `CTR`, `FLAG`, or `DP`, respectively
+- 00, 01, or 02: `ACC` is switched with `CTR`, `FLG`, or `DP`, respectively
 - 11: `TIMER` is switched with `A` (high byte) and `C` (low byte)
 
 #### `ADR` : ___0 1000
@@ -153,49 +153,68 @@ Immediate addressing is invalid for this instruciton and results in a NOP.
 #### `LDV` : ___1 0111
 Load value to register.
 
+The operand is loaded into the working register.
+
 #### `ADD` : ___1 1000
-Add without carry
+Add without carry.
 
 #### `ADC` : ___1 1001
-Add with carry
+Add with carry.
 
 #### `SUB` : ___1 1010
-Subtract without carry
+Subtract without carry.
+
+This is also used for comparison of two numbers:
+- If the operand is smaller than the register, no flag is set
+- If the operand and register value are equal, the zero flag is set.
+- If the operand is larger than the register, the overflow flag is set.
 
 #### `SBC` : ___1 1011
-Subtract with carry
+Subtract with carry.
 
 #### `ORR` : ___1 1100
-Logical OR
+Logical OR.
 
 #### `AND` : ___1 1101
-Logical AND
+Logical AND.
 
 #### `XOR` : ___1 1110
-Logical XOR
+Logical XOR/
 
 #### `ROT` : ___1 1111
-Rotate (according to operand)
+Bit-shift, rotate, increment, or decrement.
+
+This instruction operates on the working register. The last three bits of the operand determine the action:
+- `bit 0`: 1 = right-shift/decrement, 0 = left-shift/increment
+- `bit 1`: 1 = shift/rotation, 0 = increment/decrement
+- `bit 2`: 1 = circular, 0 = not circular (no effect on increment or decrement)
 
 #### `JMP` : _010 0000
-Jump unconditionally
+Jump unconditionally.
 
-#### JNE/JEQ (_010 0001)
-Jump if not equal to
+#### `JNE` : 0010 0001
+Jump if not equal to.
 
-#### JLE/JGT (_010 0010)
-Jump if less than or equal to
+Jumps if the zero flag is set.
+
+#### `JEQ` : 1010 0001
+Jump if equal to.
+
+Jumps if the zero flag is not set.
+
+#### `JLT` : 0010 0010
+Jump if less than.
+
+Jumps if the overflow flag is set and the zero flag is not set.
+
+#### `JGE` : 1010 0010
+Jump if greater than or equal to.
+
+Jumps if the overflag is not set or the zero flag is set.
 
 #### `JDC` : 0010 0011
-Decrement C and jump if not zero
+Decrement counter and jump if not zero.
+
+If `CTR` is zero, do nothing. Otherwise, decrement the value of `CTR`.
 
 
-
-### ALU instructions
-
-#### ROT
-
-This performs shifts, rotations, and crements on the working register, according to the operand:
-- `b0`: 1 = right-shift/decrement, 0 = left-shift/increment
-- `b1`: 1 = shift/rotation, 0 = crement
-- `b2`: 1 = circular, 0 = not circular (no effect on crements)

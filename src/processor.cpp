@@ -1,5 +1,6 @@
 #include "processor.h"
 #include "util.h"
+#include <iostream>
 
 const word Processor::addr() { return (rb_adh << 8) | rb_adl; }
 
@@ -126,14 +127,14 @@ void Processor::exec_operation(bool is_jump) {
       set_flag(JP, 1);
     } else {
       switch ((rb_ins & 0x0F)) {
-      case 0:
+      case 0: // unconditional jump
         set_flag(JP, 1);
         break;
-      case 1:
+      case 1: // jump if not equal
         set_flag(JP, get_flag(ZE));
         break;
-      case 2:
-        set_flag(JP, get_flag(CY));
+      case 2: // jump if less than or equal to
+        set_flag(JP, (get_flag(OF) & !get_flag(ZE)));
         break;
       }
     }
@@ -273,7 +274,7 @@ void Processor::exec_ALU_operation() {
     }
   }
 
-  return;
+  set_flag(ZE, rb_aux == 0);
 }
 
 bool Processor::eval_overflow(word rw_aux) {
@@ -323,8 +324,6 @@ void Processor::decode() {
     rb_wrk = &rb_acc;
     exec_operation(rb_ins[5]);
   }
-
-  set_flag(ZE, *rb_wrk);
 }
 
 void Processor::cycle() {
