@@ -48,7 +48,7 @@ There are also three internal flags:
 
 They are arranged in the following order:
 
-|::|::|::|::|::|::|::|::|
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
 | `SM` | `SS` | `JP` | `TF` | `TR` | `ZE` | `OF` | `CY` |
 
 # Instruction set
