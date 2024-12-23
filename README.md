@@ -54,23 +54,20 @@ They are arranged in the following order:
 
 # Instruction set
 
-Instructions are divided into the following three types:
+Instructions may have zero or two operands. For instructions with two operands, one operand is determined by the addressing mode, which is specified by the first two bits in the opcode; the other operand is one of the general-purpose registers, and is chosen by the third bit. The `ADR` instruction (set address register), this is either `H` or `L`, and for all other two-operand instructions, it is `A` or `C`.
 
-1. Memory instructions
-2. ALU instructions
-3. Jump instructions
+If the first bit in a jump instruction is set, the jump condition is inverted. This does not apply to the `JDC` instruction (decrement counter and jump if not zero).
 
-Instructions may have zero, one or two operands. The first operand is determined by the addressing mode, which is specified by the first two bits in the opcode.
-If the first bit in a jump instruction is set, the jump condition is inverted.
+The last two bits of the `SWR` instruction (swap register) are used to choose the registers to swap. The last two bits of the `FLG` instruction (operate on flag register) choose the operation to execute.
 
 ## Addressing modes
 
 | Value | Mode | Syntax | Description |
 |:-:|:-:|:-:|:-:|
-| 00 | Stack     | STK | The top of the stack is popped and taken as operand. |
-| 01 | Immediate | #XX | The next byte is the operand.                        |
-| 10 | Indirect  | @HL | The address registers point to the operand address.  |
-| 11 | Direct    | &XX | The next byte points to the operand address.         |
+| 00 | Stack     | `STK`  | The top of the stack is popped and taken as operand. |
+| 01 | Immediate | `#XX`  | The next byte is the operand.                        |
+| 10 | Indirect  | `@ADR` | The address register points to the operand address.  |
+| 11 | Direct    | `&XX`  | The next byte points to the operand address.         |
 
 When direct or immediate addressing is used, the program counter is autoincremented.
 
