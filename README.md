@@ -2,7 +2,7 @@
 
 ## Registers
 
-There are six 8-bit registers and five 16-bit registers. They can be divided into the following categories:
+There are seven 8-bit registers and six 16-bit registers. They can be divided into the following categories:
 
 ### General-purpose registers
 
@@ -30,6 +30,16 @@ These keep track of the state of the processor.
 - Stack pointer (`SP`)
 - Auxiliary register 2 (`AUX2`)
 - Timer/counter register (`TMR` or `TIMER`)
+
+### Ports
+
+These are output ports.
+
+8-bit registers:
+- Data port (`DP`)
+
+16-bit registers:
+- Address port (`AP`)
 
 ## Flags
 
@@ -101,7 +111,9 @@ All registers are set to 0. This has the effect of moving the execution of the p
 #### `SWR` : 0000 01__
 Swap registers.
 
-The exact action depends on the last two bits. If they are 00, 01, or 02, the value of the accumulator is switched with the counter, flag register, or data port, respectively. If they are 11, the value of the timer register is switched with A and C.
+The exact action depends on the last two bits:
+- 00, 01, or 02: `ACC` is switched with `CTR`, `FLAG`, or `DP`, respectively
+- 11: `TIMER` is switched with `A` (high byte) and `C` (low byte)
 
 #### `ADR` : ___0 1000
 Set address register.
