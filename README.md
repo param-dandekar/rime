@@ -9,11 +9,11 @@ There are six 8-bit registers and five 16-bit registers. They can be divided int
 These are used directly during programming.
 
 **8-bit registers:**
- - Accumulator (`A` or `ACC`)
- - Counter (`C` or `CTR`)
+- Accumulator (`A` or `ACC`)
+- Counter (`C` or `CTR`)
 
 **16-bit registers:**
- - Address register (`ADDR`; `H/L` or `ADH/ADL` for the individual bytes)
+- Address register (`ADDR`; `H/L` or `ADH/ADL` for the individual bytes)
 
 ### State registers
 
@@ -35,20 +35,21 @@ These keep track of the state of the processor.
 
 There are five main flags:
 
- - CY: carry flag
- - OF: overflow flag
- - ZE: zero flag
- - TO: timer on/off flag
- - TF: timer overflow flag
+- `CY`: carry flag
+- `OF`: overflow flag
+- `ZE`: zero flag
+- `TO`: timer on/off flag
+- `TF`: timer overflow flag
 
 There are also three internal flags:
 
- - JP: jump flag
- - SS and SM: flags used for retrieval of operand from memory
+- `JP`: jump flag
+- `SS` and `SM`: flags used for retrieval of operand from memory
 
 They are arranged in the following order:
 
-`SM SS JP TF TR ZE OF CY`
+|::|::|::|::|::|::|::|::|
+| `SM` | `SS` | `JP` | `TF` | `TR` | `ZE` | `OF` | `CY` |
 
 # Instruction set
 
@@ -95,6 +96,6 @@ The action depends on the last two bits. If they are 00, 01, or 02, the accumula
 #### ROT
 
 This performs shifts, rotations, and crements on the working register, according to the operand:
- - b0: 1 = right-shift/decrement, 0 = left-shift/increment
- - b1: 1 = shift/rotation, 0 = crement
- - b2: 1 = circular, 0 = not circular (no effect on crements)
+- `b0`: 1 = right-shift/decrement, 0 = left-shift/increment
+- `b1`: 1 = shift/rotation, 0 = crement
+- `b2`: 1 = circular, 0 = not circular (no effect on crements)
