@@ -69,17 +69,15 @@ The last two bits of the `SWR` instruction (swap register) are used to choose th
 | 10 | Indirect  | `@ADR` | The address register points to the operand address.  |
 | 11 | Direct    | `&XX`  | The next byte points to the operand address.         |
 
-When direct or immediate addressing is used, the program counter is autoincremented.
+When direct or immediate addressing is used, the program counter is autoincremented as the operand is read.
 
-The third bit indicates which register instructions with two operands should operate on (0 for `A`, 1 for `C`). For example:
+For example:
 ```
-0101 0100 : STV #XX,A : Store the hex value XXh in A
-1011 1000 : ADD @HL,C : Add the value pointed by the address registers in RAM, to C
-```
-The only exception to this is the `set address register` instruction, which uses the third bit to choose the byte of the address register (0 for `L`, 1 for `H`):
-```
-0010 0100 : ADR STK,H : Store value at the top of the stack in H
-0100 0100 : ADR #XX,H : Store the hex value XXh in L
+STV #XX A // 0101 0110 : Store the literal value XX in A
+
+ADD @HL C // 1011 1000 : Add the value pointed by the address registers in RAM, to C
+
+ADR STK H // 0010 1000: Store value at the top of the stack in H
 ```
 
 ## Instructions
