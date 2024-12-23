@@ -2,10 +2,8 @@
 
 #include "mem.h"
 #include "util.h"
-#include <cstdint>
 
-#define REG_CNT 6
-#define PRT_CNT 2
+#define REG_CNT 19
 
 enum e_FlagBit {
   CY, // carry
@@ -14,6 +12,8 @@ enum e_FlagBit {
   TO, // timer on
   TF, // timer overflow
   JP, // internal flag for jumps
+  SS, // internal flag for when operand is on stack
+  SM, // internal flag for when operand is in memory
 };
 
 /* Prefixes:
@@ -31,8 +31,7 @@ private:
   byte rb_aux; // Auxiliary register 1
   word rw_aux; // Auxiliary register 2
 
-  bool src_in_stack;
-  bool src_in_memory;
+  bool RW;
 
   byte rb_acc; // Accumulator register
   byte rb_ctr; // Counter register
@@ -52,8 +51,8 @@ private:
 
   const word addr();
   const bool get_flag(e_FlagBit flag);
-  const void set_flag(e_FlagBit flag);
-  const void clr_flag(e_FlagBit flag);
+
+  void set_flag(e_FlagBit flag, bool condition);
 
   /* These functions are used for decoding instructions */
   const bool has_operand();
@@ -89,22 +88,29 @@ public:
   Processor(Memory *ROM, Memory *RAM) : _ROM(ROM), _RAM(RAM) {
     _ROM->_addr_bus = &pw_addr;
     _ROM->_data_bus = &pb_data;
+    _ROM->RW = &RW;
+
     _RAM->_addr_bus = &pw_addr;
     _RAM->_data_bus = &pb_data;
+    _RAM->RW = &RW;
   }
 
   void cycle();
 
   /* Writes all the registers to dest in the following order:
-   * Program counter
-   * Stack pointer
-   * Current opcode and operand
-   * Address register
-   * Accumulator and counter
-   * Timer
-   * Flag register
-   * Address port
-   * Data port (lower byte only)
+   * Flag register        (1)
+   * Program counter      (2)
+   * Stack pointer        (2)
+   * Opcode               (1)
+   * Operand              (1)
+   * Address register     (2)
+   * Accumulator          (1)
+   * Counter              (1)
+   * Timer                (2)
+   * Auxiliary register 1 (1)
+   * Auxiliary register 2 (2)
+   * Data port            (1)
+   * Address port         (2)
    * */
-  void get_registers(uint16_t *dest);
+  void get_registers(byte *dest);
 };

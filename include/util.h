@@ -76,6 +76,15 @@ public:
     return ((_value & (1 << n)) >> n) != 0;
   }
 
+  // Binary representation
+  std::string bin() const {
+    std::string result(sizeof(T) * 8, '0');
+    for (int i = 0; i < sizeof(T) * 8; i--) {
+      result[i] = (_value & (1 << (sizeof(T) * 8 - 1 - i))) ? '1' : '0';
+    }
+    return result;
+  }
+
   // Hex representation
   std::string hex() const {
     std::ostringstream oss;

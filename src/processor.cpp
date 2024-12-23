@@ -1,16 +1,16 @@
 #include "processor.h"
 #include "util.h"
-#include <cstdint>
-#include <iostream>
 
 const word Processor::addr() { return (rb_adh << 8) | rb_adl; }
 
 const bool Processor::get_flag(e_FlagBit flag) { return rb_flg[flag]; }
-const void Processor::set_flag(e_FlagBit flag) {
-  rb_flg = rb_flg | (1 << flag);
-}
-const void Processor::clr_flag(e_FlagBit flag) {
-  rb_flg = rb_flg & ~(1 << flag);
+
+void Processor::set_flag(e_FlagBit flag, bool condition) {
+  if (condition) {
+    rb_flg = rb_flg | (1 << flag);
+  } else {
+    rb_flg = rb_flg & ~(1 << flag);
+  }
 }
 
 /* True if has an operand */
@@ -40,37 +40,43 @@ const bool Processor::is_ALU_op() { return (rb_ins & 0x18) == 0x18; }
 
 void Processor::readROM(const word addr, byte *dest) {
   pw_addr = addr;
-  _ROM->read();
+  RW = READ;
+  _ROM->update();
   *dest = pb_data;
 }
 
 void Processor::readRAM(const word addr, byte *dest) {
   pw_addr = addr;
-  _RAM->read();
+  RW = READ;
+  _RAM->update();
   *dest = pb_data;
 }
 
 void Processor::writeRAM(const word addr, byte *dest) {
   pw_addr = addr;
   pb_data = *dest;
-  _RAM->write();
+  RW = WRITE;
+  _RAM->update();
 }
 
 void Processor::push(byte *dest) {
   pw_addr = rw_stk_ptr++;
   pb_data = *dest;
-  _RAM->write();
+  RW = WRITE;
+  _RAM->update();
 }
 
 void Processor::pop(byte *dest) {
   pw_addr = rw_stk_ptr--;
-  _RAM->read();
+  RW = READ;
+  _RAM->update();
   *dest = pb_data;
 }
 
 void Processor::fetch(byte *dest) {
   pw_addr = rw_prg_ctr++;
-  _ROM->read();
+  RW = READ;
+  _ROM->update();
   *dest = pb_data;
 }
 
@@ -81,34 +87,31 @@ void Processor::set_operand() {
   }
 
   /* If both bits are unset, the operand is in the stack */
-  src_in_stack = (rb_ins & 0xC0) == 0;
+  set_flag(SS, (rb_ins & 0xC0) == 0);
+  ;
   /* Bit 7 indicates whether the operand is in memory */
-  src_in_memory = rb_ins[7];
+  set_flag(SM, rb_ins[7]);
 }
 
 void Processor::exec_operation(bool is_jump) {
   if (is_jump) {
-    clr_flag(JP);
+    set_flag(JP, 0);
     if ((rb_ins & 0x0F) == 0x3) {
       if (!rb_ctr) {
         return;
       }
       rb_ctr--;
-      set_flag(JP);
+      set_flag(JP, 1);
     } else {
       switch ((rb_ins & 0x0F)) {
       case 0:
-        set_flag(JP);
+        set_flag(JP, 1);
         break;
       case 1:
-        if (get_flag(ZE)) {
-          set_flag(JP);
-        }
+        set_flag(JP, get_flag(ZE));
         break;
       case 2:
-        if (get_flag(CY)) {
-          set_flag(JP);
-        }
+        set_flag(JP, get_flag(CY));
         break;
       }
     }
@@ -119,7 +122,7 @@ void Processor::exec_operation(bool is_jump) {
   } else {
     if ((rb_ins & 0xFC) == 0x04) { // SWR
       if ((rb_ins & 0x03) == 0x03) {
-        clr_flag(TO);
+        set_flag(TO, 0);
         rb_aux = rb_ctr;
         rb_ctr = (rw_timer & 0xFF);
         rw_timer = (rw_timer & 0xFF00) | (rb_aux);
@@ -174,9 +177,9 @@ void Processor::exec_operation() {
    * register at the given address
    * Immediate addressing is not legal for STV and results in a NOP */
   if (is_STV()) {
-    if (src_in_stack) {
+    if (get_flag(SS)) {
       push(rb_wrk);
-    } else if (src_in_memory) {
+    } else if (get_flag(SM)) {
       if (rb_ins[6]) {
         writeRAM(rb_opd, rb_wrk);
       } else {
@@ -188,9 +191,9 @@ void Processor::exec_operation() {
 
   /* For instructions other than STV, the operand may have to be read
    * from RAM or the stack */
-  if (src_in_stack) { // Pop the stack
+  if (get_flag(SS)) { // Pop the stack
     pop(&rb_opd);
-  } else if (src_in_memory) {
+  } else if (get_flag(SM)) {
     if (rb_ins[6]) {
       readRAM(rb_opd, &rb_opd);
     } else {
@@ -225,17 +228,9 @@ void Processor::exec_ALU_operation() {
       rw_aux = *rb_wrk + rb_opd + (get_flag(CY) ^ rb_ins[1]);
     }
 
-    if (rw_aux[8] ^ rb_ins[1]) {
-      set_flag(CY);
-    } else {
-      clr_flag(CY);
-    }
+    set_flag(CY, rw_aux[8] ^ rb_ins[1]);
 
-    if (eval_overflow(rw_aux)) {
-      set_flag(OF);
-    } else {
-      clr_flag(OF);
-    }
+    set_flag(OF, eval_overflow(rw_aux));
 
     rb_aux = (rw_aux & 0xFF);
 
@@ -272,12 +267,12 @@ void Processor::exec_rotate() {
   } else {
     if (rb_opd[0]) {         // decrement
       if (*rb_wrk == 0x00) { // roll-over
-        set_flag(OF);
+        set_flag(OF, 1);
       }
       rb_aux = *rb_wrk - 1;
     } else {                 // increment
       if (*rb_wrk == 0xFF) { // roll-over
-        set_flag(OF);
+        set_flag(OF, 1);
       }
       rb_aux = *rb_wrk + 1;
     }
@@ -307,19 +302,15 @@ void Processor::decode() {
     exec_operation(rb_ins[5]);
   }
 
-  if (*rb_wrk) {
-    clr_flag(ZE);
-  } else {
-    set_flag(ZE);
-  }
+  set_flag(ZE, *rb_wrk);
 }
 
 void Processor::cycle() {
   if (get_flag(TO)) {
     if (rw_timer == 0xFFFF) {
       rw_timer = 0x0000;
-      clr_flag(TO);
-      set_flag(TF);
+      set_flag(TO, 0);
+      set_flag(TF, 1);
     } else {
       rw_timer++;
     }
@@ -328,17 +319,30 @@ void Processor::cycle() {
   decode();
 }
 
-void Processor::get_registers(uint16_t *dest) {
-  *dest++ = rw_prg_ctr;
-  *dest++ = rw_stk_ptr;
-
-  *dest++ = (rb_ins << 8) | rb_opd;
-  *dest++ = (rb_adh << 8) | rb_adl;
-  *dest++ = (rb_acc << 8) | rb_ctr;
-
-  *dest++ = rw_timer;
+void Processor::get_registers(byte *dest) {
   *dest++ = rb_flg;
 
-  *dest++ = pw_addr;
+  *dest++ = (rw_prg_ctr >> 8);
+  *dest++ = (rw_prg_ctr & 0xFF);
+
+  *dest++ = (rw_stk_ptr >> 8);
+  *dest++ = (rw_stk_ptr & 0xFF);
+
+  *dest++ = rb_ins;
+  *dest++ = rb_opd;
+  *dest++ = rb_adh;
+  *dest++ = rb_adl;
+  *dest++ = rb_acc;
+  *dest++ = rb_ctr;
+
+  *dest++ = (rw_timer >> 8);
+  *dest++ = (rw_timer & 0xFF);
+
+  *dest++ = rb_aux;
+  *dest++ = (rw_aux >> 8);
+  *dest++ = (rw_aux & 0xFF);
+
   *dest++ = pb_data;
+  *dest++ = (pw_addr >> 8);
+  *dest++ = (pw_addr & 0xFF);
 }

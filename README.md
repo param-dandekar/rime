@@ -1,34 +1,37 @@
 # Architecture
 
+## Registers
+
+There are six 8-bit registers and five 16-bit registers. They can be divided into the following categories:
+
+### General-purpose registers
+
+These are used directly during programming.
+
+8-bit registers:
+ - Accumulator
+ - Counter
+16-bit registers:
+ - Address register
+
 ## Flags
 
-There are the following flags:
+There are five main flags:
 
- - C: carry flag
- - O: overflow flag
- - Z: zero flag
- - R0, R1, R2: rotation control flags
+ - CY: carry flag
+ - OF: overflow flag
+ - ZE: zero flag
+ - TO: timer on/off flag
+ - TF: timer overflow flag
+
+There are also three internal flags:
+
+ - JP: jump flag
+ - SS and SM: flags used for retrieval of operand from memory
 
 They are arranged in the following order:
 
-R2 R1 R0 -- -- Z  O  C
-
-## Memory layout
-
-There are 256 bytes of RAM:
-
-| Start | End | Length | Name        |
-| :---: | :-: | :----: | :---------: |
-| 0x00  | 0x0F| 16     | Stack (STK) |
-| 0x10  | 0xFF| 240    | Memory (MEM)|
-
-There are also some internal registers:
-
-1. Accumulator (A, ACC)
-2. Counter (C, CTR)
-3. Address high (H, ADH)
-4. Address low (L, ADL)
-
+`SM SS JP TF TR ZE OF CY`
 
 # Instruction set
 

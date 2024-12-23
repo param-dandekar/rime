@@ -1,6 +1,6 @@
-#include <cstdint>
 #include <cstdlib>
 #include <fstream>
+#include <ios>
 #include <iostream>
 #include <ostream>
 
@@ -13,7 +13,7 @@
 
 // using namespace std;
 
-uint16_t registers[REG_CNT + PRT_CNT] = {0};
+byte registers[REG_CNT] = {0};
 
 int read_program(byte *a_ROM);
 void print_registers();
@@ -24,6 +24,7 @@ int main(int argc, char *argv[]) {
 
   Memory ROM(a_ROM, ROM_SIZE);
   Memory RAM(a_RAM, RAM_SIZE);
+
   Processor p(&ROM, &RAM);
 
   read_program(a_ROM);
@@ -40,15 +41,20 @@ int main(int argc, char *argv[]) {
 }
 
 void print_registers() {
+  /*
   std::cout << "T           Registers           T          Flags          T\n";
   std::cout << "| PC   SP   INS  ADR  A C  TMR  | -- -- -- -- -- ZE OF CY |\n";
 
   std::cout << "| ";
+
+  */
   for (int i = 0; i < REG_CNT; i++) {
-    std::cout << std::hex << std::uppercase << std::setw(4) << std::setfill('0')
-              << registers[i];
-    std::cout << ' ';
+    std::cout << registers[i].hex() << ' ';
   }
+
+  std::cout << std::endl;
+  /*
+  std::cout << std::endl;
 
   std::cout << "| ";
   byte FR = registers[REG_CNT];
@@ -60,6 +66,7 @@ void print_registers() {
 
   std::cout << "| ";
   std::cout << std::endl;
+  */
 }
 
 int read_program(byte *ROM) {
