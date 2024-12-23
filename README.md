@@ -9,11 +9,27 @@ There are six 8-bit registers and five 16-bit registers. They can be divided int
 These are used directly during programming.
 
 **8-bit registers:**
- - Accumulator
- - Counter
+ - Accumulator (`A` or `ACC`)
+ - Counter (`C` or `CTR`)
 
 **16-bit registers:**
- - Address register
+ - Address register (`ADDR`; `H/L` or `ADH/ADL` for the individual bytes)
+
+### State registers
+
+These keep track of the state of the processor.
+
+**8-bit registers:**
+- Flag register (`FR` or `FLG`)
+- Opcode register (`OPC`)
+- Operand register (`OPD`)
+- Auxiliary register 1 (`AUX1`)
+
+**16-bit registers:**
+- Program counter (`PC`)
+- Stack pointer (`SP`)
+- Auxiliary register 2 (`AUX2`)
+- Timer/counter register (`TMR` or `TIMER`)
 
 ## Flags
 
