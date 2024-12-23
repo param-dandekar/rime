@@ -1,0 +1,3 @@
+/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles/processor.dir
+/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles/edit_cache.dir
+/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles/rebuild_cache.dir

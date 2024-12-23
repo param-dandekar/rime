@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -ggdb -O0 -std=gnu++17 -o CMakeFiles/processor.dir/src/main.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/main.cpp",
+  "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/main.cpp",
+  "output": "CMakeFiles/processor.dir/src/main.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -ggdb -O0 -std=gnu++17 -o CMakeFiles/processor.dir/src/mem.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/mem.cpp",
+  "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/mem.cpp",
+  "output": "CMakeFiles/processor.dir/src/mem.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -ggdb -O0 -std=gnu++17 -o CMakeFiles/processor.dir/src/processor.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/processor.cpp",
+  "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/processor.cpp",
+  "output": "CMakeFiles/processor.dir/src/processor.cpp.o"
+}
+]
