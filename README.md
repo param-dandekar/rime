@@ -88,27 +88,27 @@ These instructions exist in the processor itself.
 
 ### Zero-operand instructions
 
-#### NOP (0000 0000)
+#### `NOP` : 0000 0000
 No operation.
 
 The processor does nothing on this clock cycle, and goes ahead to the next instruction.
 
-#### RST (0000 0001)
+#### `RST` : 0000 0001
 Resets the processor.
 
 All registers are set to 0. This has the effect of moving the execution of the program to the start.
 
-#### SWR (0000 01__)
+#### `SWR` : 0000 01__
 Swap registers.
 
 The exact action depends on the last two bits. If they are 00, 01, or 02, the value of the accumulator is switched with the counter, flag register, or data port, respectively. If they are 11, the value of the timer register is switched with A and C.
 
-#### ADR (___0 1000)
+#### `ADR` : ___0 1000
 Set address register.
 
 Stores the operand in the specified byte of the address register.
 
-#### FLG (___0 11__)
+#### `FLG` : ___0 11__
 Operate on flag registers.
 
 Executes a bitwise AND, OR, or XOR on the flag register. The last two bits specify the operation:
@@ -119,17 +119,17 @@ Executes a bitwise AND, OR, or XOR on the flag register. The last two bits speci
 
 This can be used to set, clear, or flip flags.
 
-#### PSH (___1 0100)
+#### `PSH` : ___1 0100
 Push value to stack.
 
 This stores the value of the working register to the top of the stack (the location pointed to by the stack pointer), and increments the stack pointer.
 
-#### POP (0001 0101)
+#### `POP` : 0001 0101
 Pop value from stack.
 
 This stores the value of the top of the stack to the working register, and decrements the stack pointer.
 
-#### STV (___1 0110)
+#### `STV` : ___1 0110
 Store value from register.
 
 This stores the value of the working register to the specified location:
@@ -138,34 +138,34 @@ This stores the value of the working register to the specified location:
 
 Immediate addressing is invalid for this instruciton and results in a NOP.
 
-#### LDV (___1 0111)
+#### `LDV` : ___1 0111
 Load value to register.
 
-#### ADD (___1 1000)
+#### `ADD` : ___1 1000
 Add without carry
 
-#### ADC (___1 1001)
+#### `ADC` : ___1 1001
 Add with carry
 
-#### SUB (___1 1010)
+#### `SUB` : ___1 1010
 Subtract without carry
 
-#### SBC (___1 1011)
+#### `SBC` : ___1 1011
 Subtract with carry
 
-#### ORR (___1 1100)
+#### `ORR` : ___1 1100
 Logical OR
 
-#### AND (___1 1101)
+#### `AND` : ___1 1101
 Logical AND
 
-#### XOR (___1 1110)
+#### `XOR` : ___1 1110
 Logical XOR
 
-#### ROT (___1 1111)
+#### `ROT` : ___1 1111
 Rotate (according to operand)
 
-#### JMP (_010 0000)
+#### `JMP` : _010 0000
 Jump unconditionally
 
 #### JNE/JEQ (_010 0001)
@@ -174,7 +174,7 @@ Jump if not equal to
 #### JLE/JGT (_010 0010)
 Jump if less than or equal to
 
-#### JDC (0010 0011)
+#### `JDC` : 0010 0011
 Decrement C and jump if not zero
 
 
