@@ -8,10 +8,11 @@ There are six 8-bit registers and five 16-bit registers. They can be divided int
 
 These are used directly during programming.
 
-8-bit registers:
+**8-bit registers:**
  - Accumulator
  - Counter
-16-bit registers:
+
+**16-bit registers:**
  - Address register
 
 ## Flags
