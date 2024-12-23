@@ -68,6 +68,8 @@ private:
   void readRAM(const word addr, byte *dest);
   void writeRAM(const word addr, byte *data);
 
+  void reset();
+
   /* Push and pop operations on the stack (first 16 bytes of RAM).
    * These do NOT safeguard against stack overflow. */
   void push(byte *data);

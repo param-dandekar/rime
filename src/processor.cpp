@@ -38,6 +38,28 @@ const bool Processor::is_STK_op() { return (rb_ins & 0x1E) == 0x14; }
 /* True if instruction matches ___1 1___ */
 const bool Processor::is_ALU_op() { return (rb_ins & 0x18) == 0x18; }
 
+void Processor::reset() {
+  rw_prg_ctr = 0;
+  rw_stk_ptr = 0;
+
+  rb_flg = 0;
+
+  rb_ins = 0;
+  rb_opd = 0;
+  rb_aux = 0;
+  rw_aux = 0;
+
+  RW = 0;
+
+  rb_acc = 0;
+  rb_ctr = 0;
+  rb_adh = 0;
+  rb_adl = 0;
+
+  pw_addr = 0;
+  pb_data = 0;
+}
+
 void Processor::readROM(const word addr, byte *dest) {
   pw_addr = addr;
   RW = READ;
