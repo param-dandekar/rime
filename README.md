@@ -109,14 +109,14 @@ All registers are set to 0. This has the effect of moving the execution of the p
 #### `SWR` : 0000 01__
 **Swap registers.**\
 The exact action depends on the last two bits:
-- 00, 01, or 02: `ACC` is switched with `CTR`, `FLG`, or `DP`, respectively
+- 00, 01, or 10: `ACC` is switched with `CTR`, `FLG`, or `DP`, respectively
 - 11: `TIMER` is switched with `A` (high byte) and `C` (low byte)
 
 #### `ADR` : ___0 1000
 **Set address register.**\
 Stores the operand in the specified byte of the address register.
 
-#### `FLG` : ___0 11__
+#### `FLG` : __00 11__
 **Operate on flag registers.**\
 Executes a bitwise AND, OR, or XOR on the flag register. The last two bits specify the operation:
 
@@ -130,7 +130,7 @@ This can be used to set, clear, or flip flags.
 **Push value to stack.**\
 This stores the value of the working register to the top of the stack (the location pointed to by the stack pointer), and increments the stack pointer.
 
-#### `POP` : 0001 0101
+#### `POP` : 00_1 0101
 **Pop value from stack.**\
 This stores the value of the top of the stack to the working register, and decrements the stack pointer.
 
