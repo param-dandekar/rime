@@ -11,16 +11,19 @@
 #define ROM_SIZE 65536
 #define RAM_SIZE 256
 
+#define MEM_PRT_LEN 18
+
 // using namespace std;
 
 byte registers[REG_CNT] = {0};
+
+byte a_ROM[ROM_SIZE] = {0};
+byte a_RAM[RAM_SIZE] = {0};
 
 int read_program(byte *a_ROM);
 void print_registers();
 
 int main(int argc, char *argv[]) {
-  byte a_ROM[ROM_SIZE] = {0};
-  byte a_RAM[RAM_SIZE] = {0};
 
   Memory ROM(a_ROM, ROM_SIZE);
   Memory RAM(a_RAM, RAM_SIZE);
@@ -29,12 +32,25 @@ int main(int argc, char *argv[]) {
 
   read_program(a_ROM);
 
+  p.reset();
+
   int iter = atoi(argv[1]);
 
+  std::cout << "FR PC    SP    INS   H  L  A  C  TMR   A8 A16   DP AP";
+
+  std::cout << "    |";
+
+  for (int i = 0; i < MEM_PRT_LEN; i++) {
+    std::cout << " " << std::hex << std::uppercase << std::setfill('0')
+              << std::setw(2) << i;
+  }
+
+  std::cout << std::endl;
+
   for (int i = 0; i < iter; i++) {
-    p.cycle();
     p.get_registers(registers);
     print_registers();
+    p.cycle();
   }
 
   return 0;
@@ -48,14 +64,18 @@ void print_registers() {
   std::cout << "| ";
 
   */
+
   for (int i = 0; i < REG_CNT; i++) {
     std::cout << registers[i].hex() << ' ';
   }
 
+  std::cout << "| ";
+  for (int i = 0; i < MEM_PRT_LEN; i++) {
+    std::cout << a_RAM[i].hex() << ' ';
+  }
+
   std::cout << std::endl;
   /*
-  std::cout << std::endl;
-
   std::cout << "| ";
   byte FR = registers[REG_CNT];
   for (int i = 0; i < 8; i++) {

@@ -54,42 +54,51 @@ extern int yydebug;
     YYEOF = 0,                     /* "end of file"  */
     YYerror = 256,                 /* error  */
     YYUNDEF = 257,                 /* "invalid token"  */
-    NOP = 258,                     /* NOP  */
-    RST = 259,                     /* RST  */
-    SWR = 260,                     /* SWR  */
-    FLG = 261,                     /* FLG  */
-    ADR = 262,                     /* ADR  */
-    PSH = 263,                     /* PSH  */
-    POP = 264,                     /* POP  */
-    STV = 265,                     /* STV  */
-    LDV = 266,                     /* LDV  */
-    ADD = 267,                     /* ADD  */
-    ADC = 268,                     /* ADC  */
-    SUB = 269,                     /* SUB  */
-    SBC = 270,                     /* SBC  */
-    ORR = 271,                     /* ORR  */
-    AND = 272,                     /* AND  */
-    XOR = 273,                     /* XOR  */
-    ROT = 274,                     /* ROT  */
-    JMP = 275,                     /* JMP  */
-    JNE = 276,                     /* JNE  */
-    JEQ = 277,                     /* JEQ  */
-    JLT = 278,                     /* JLT  */
-    JGE = 279,                     /* JGE  */
-    JDC = 280,                     /* JDC  */
-    ACC = 281,                     /* ACC  */
-    CTR = 282,                     /* CTR  */
-    ADH = 283,                     /* ADH  */
-    ADL = 284,                     /* ADL  */
-    TMR = 285,                     /* TMR  */
-    DAT = 286,                     /* DAT  */
-    LABEL = 287,                   /* LABEL  */
-    LABEL_DEF = 288,               /* LABEL_DEF  */
-    LIT = 289,                     /* LIT  */
-    STK = 290,                     /* STK  */
-    IMM = 291,                     /* IMM  */
-    IND = 292,                     /* IND  */
-    DIR = 293                      /* DIR  */
+    START = 258,                   /* START  */
+    END = 259,                     /* END  */
+    NOP = 260,                     /* NOP  */
+    RST = 261,                     /* RST  */
+    SWR = 262,                     /* SWR  */
+    FLG = 263,                     /* FLG  */
+    ADR = 264,                     /* ADR  */
+    PSH = 265,                     /* PSH  */
+    POP = 266,                     /* POP  */
+    STV = 267,                     /* STV  */
+    LDV = 268,                     /* LDV  */
+    ADD = 269,                     /* ADD  */
+    ADC = 270,                     /* ADC  */
+    SUB = 271,                     /* SUB  */
+    SBC = 272,                     /* SBC  */
+    ORR = 273,                     /* ORR  */
+    AND = 274,                     /* AND  */
+    XOR = 275,                     /* XOR  */
+    ROT = 276,                     /* ROT  */
+    JMP = 277,                     /* JMP  */
+    JNE = 278,                     /* JNE  */
+    JEQ = 279,                     /* JEQ  */
+    JLT = 280,                     /* JLT  */
+    JGE = 281,                     /* JGE  */
+    JDC = 282,                     /* JDC  */
+    ACC = 283,                     /* ACC  */
+    CTR = 284,                     /* CTR  */
+    ADH = 285,                     /* ADH  */
+    ADL = 286,                     /* ADL  */
+    TMR = 287,                     /* TMR  */
+    FRG = 288,                     /* FRG  */
+    SP = 289,                      /* SP  */
+    PC = 290,                      /* PC  */
+    DP = 291,                      /* DP  */
+    AP = 292,                      /* AP  */
+    LABEL = 293,                   /* LABEL  */
+    LABEL_DEF = 294,               /* LABEL_DEF  */
+    DEF = 295,                     /* DEF  */
+    FUN = 296,                     /* FUN  */
+    RET = 297,                     /* RET  */
+    LIT = 298,                     /* LIT  */
+    STK = 299,                     /* STK  */
+    IMM = 300,                     /* IMM  */
+    IND = 301,                     /* IND  */
+    DIR = 302                      /* DIR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -98,13 +107,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 34 "rime.y"
+#line 43 "rime.y"
 
   unsigned char byte;
   unsigned char lit_val;
   char *label;
 
-#line 108 "rime.tab.h"
+#line 117 "rime.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;

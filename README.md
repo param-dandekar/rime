@@ -106,11 +106,24 @@ The processor does nothing on this clock cycle, and goes ahead to the next instr
 **Resets the processor.**\
 All registers are set to 0. This has the effect of moving the execution of the program to the start.
 
-#### `SWR` : 0000 01__
+#### `SWR` : ___0 01__
 **Swap registers.**\
-The exact action depends on the last two bits:
-- 00, 01, or 10: `ACC` is switched with `CTR`, `FLG`, or `DP`, respectively
-- 11: `TIMER` is switched with `A` (high byte) and `C` (low byte)
+The first three bits choose the first register:
+
+| Bits | Register 1 |
+|:-:|:-:|
+| 000 | `C` |
+| 001 | `F` |
+| 010 | `SP` |
+| 011 | `PC` |
+| 100 | `TMR` |
+| 101 | `DP` |
+| 110 | `AP` |
+| 111 | `ADDR` |
+
+If the last bit is 0, the second register is `A` and `C`; for 8-bit registers, `C` is set to zero. If the last bit is 1, the second register is the address register.
+
+If bit 2 is set, the values of the registers are swapped. Otherwise, the value of register 1 is copied to register 2.
 
 #### `ADR` : ___0 1000
 **Set address register.**\
@@ -126,9 +139,9 @@ Executes a bitwise AND, OR, or XOR on the flag register. The last two bits speci
 
 This can be used to set, clear, or flip flags.
 
-#### `PSH` : ___1 0100
+#### `PSH` : __01 0100
 **Push value to stack.**\
-This stores the value of the working register to the top of the stack (the location pointed to by the stack pointer), and increments the stack pointer.
+This stores the operand to the top of the stack (the location pointed to by the stack pointer), and increments the stack pointer.
 
 #### `POP` : 00_1 0101
 **Pop value from stack.**\
@@ -201,4 +214,9 @@ Jumps if the overflow flag is not set or the zero flag is set.
 **Decrement counter and jump if not zero.**\
 If `CTR` is zero, do nothing. Otherwise, decrement the value of `CTR`.
 
+## Programming
+
+### Entry point
+
+The address for the "main" function is stored in the first two bytes of the ROM.
 

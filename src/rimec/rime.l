@@ -4,7 +4,7 @@
 #define MAX_LABEL_LEN 32
 %}
 
-
+label [a-zA-Z0-9_]{1,32}
 
 digit_hex [0-9a-fA-F]
 digit_bin [01]
@@ -14,13 +14,20 @@ lit_hex {digit_hex}{1,2}[hH]?
 
 ORR OR{1,2}
 
-label [a-zA-Z0-9_]{1,32}
+addr_port ADD?R_?P(ORT)?
+data_port DATA?_?P(ORT)?
 
 comment \%.*
 
 %%
 
+"START" { return START; }
+
 {comment} {}
+
+"DEF" { return DEF; }
+"RET" { return RET; }
+"FUN" { return FUN; }
 
 "NOP"   { return NOP; }
 "RST"   { return RST; }
@@ -54,9 +61,12 @@ comment \%.*
 "C"|"CTR"         { return CTR; }
 "L"|"ADL"         { return ADL; }
 "H"|"ADH"         { return ADH; }
-"FR"              { return FLG; }
+"F"|"FR"          { return FRG; }
 "T"|"TMR"|"TIMER" { return TMR; }
-"DP"|"DATA"       { return DAT; }
+{data_port}       { return DP; }
+{addr_port}       { return AP; }
+"SP"              { return SP;  }
+"PC"              { return PC;  }
 
 "STK"   { return STK; }
 "#"     { return IMM; }
@@ -82,6 +92,8 @@ comment \%.*
 
 [ \t\n]+        { /* Ignore whitespace */ }
 .               { printf("Unknown token: %s\n", yytext); }
+
+<<EOF>>     { return END; }
 
 %%
 int yywrap() { return 1; }

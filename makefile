@@ -6,21 +6,23 @@ default: all
 
 all: build
 
-.PHONY: build clean-all clean-build clean-parser debug reconfig parser
+.PHONY: build clean-all clean-build clean-compiler debug reconfig compiler
 
 build:
 	make -C ./build VERBOSE=1
-	./assemble.sh
 
-parser:
-	bison -d $(PARSER).y
-	flex $(LEXER).l
-	gcc -o $(COMPILER) $(PARSER).tab.c lex.yy.c -lfl
+compiler:
+	cd src/${COMPILER} &&\
+	bison -d ${PARSER}.y &&\
+	flex ${LEXER}.l &&\
+	gcc -o ../../${COMPILER} ${PARSER}.tab.c lex.yy.c -lfl
 
-clean-all: clean-build clean-parser
+clean-all: clean-build clean-compiler
 
-clean-parser:
-	rm -f $(PARSER).tab.* lex.*
+clean-compiler:
+	cd src/${COMPILER} &&\
+	rm -f ${PARSER}.tab.* lex.* &&\
+	rm -f ${COMPILER}
 
 clean-build:
 	make -C ./build clean

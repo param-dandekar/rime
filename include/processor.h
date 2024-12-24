@@ -11,7 +11,7 @@ enum e_FlagBit {
   ZE, // zero
   TO, // timer on
   TF, // timer overflow
-  JP, // internal flag for jumps
+  IN, // internal flag for jumps and SWR
   SS, // internal flag for when operand is on stack
   SM, // internal flag for when operand is in memory
 };
@@ -45,6 +45,7 @@ private:
 
   /* Working register; usually A or C, except for ADR */
   byte *rb_wrk = &rb_acc;
+  word *rw_wrk;
 
   Memory *_ROM;
   Memory *_RAM;
@@ -56,6 +57,7 @@ private:
 
   /* These functions are used for decoding instructions */
   const bool has_operand();
+  const bool is_JMP();
   const bool is_ADR();
   const bool is_FLG();
   const bool is_STV();
@@ -68,8 +70,6 @@ private:
   void readRAM(const word addr, byte *dest);
   void writeRAM(const word addr, byte *data);
 
-  void reset();
-
   /* Push and pop operations on the stack (first 16 bytes of RAM).
    * These do NOT safeguard against stack overflow. */
   void push(byte *data);
@@ -81,6 +81,7 @@ private:
   void decode();
   void set_operand();
   void exec_operation();
+  void exec_SWR_operation();
   void exec_operation(bool is_jump);
   void exec_ALU_operation();
   bool eval_overflow(word sum);
@@ -96,6 +97,8 @@ public:
     _RAM->_data_bus = &pb_data;
     _RAM->RW = &RW;
   }
+
+  void reset();
 
   void cycle();
 

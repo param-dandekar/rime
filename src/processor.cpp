@@ -19,19 +19,23 @@ const bool Processor::has_operand() {
   return (rb_ins[4] || is_ADR() || is_FLG());
 }
 
+/* True if instruction matches _010 00__ */
+const bool Processor::is_JMP() { return (rb_ins & 0x7C) == 0x20; }
+
+/* True if instruction matches ___0 1000 */
 const bool Processor::is_ADR() { return (rb_ins & 0x1F) == 0x08; }
 
-/* True if instruction matches ___0 01__ */
+/* True if instruction matches ___0 11__ */
 const bool Processor::is_FLG() { return (rb_ins & 0x1C) == 0x0C; }
 
 /* True if instruction matches ___1 0110 */
 const bool Processor::is_STV() { return (rb_ins & 0x1F) == 0x16; }
 
 /* True if instruction matches ___1 0100 */
-const bool Processor::is_PSH() { return (rb_ins & 0x1F) == 0x14; }
+const bool Processor::is_PSH() { return (rb_ins & 0x3F) == 0x14; }
 
 /* True if instruction matches ___1 0100 */
-const bool Processor::is_POP() { return (rb_ins & 0x1F) == 0x15; }
+const bool Processor::is_POP() { return (rb_ins & 0xDF) == 0x15; }
 
 /* False if instruction matches ___1 010_ */
 const bool Processor::is_STK_op() { return (rb_ins & 0x1E) == 0x14; }
@@ -59,6 +63,11 @@ void Processor::reset() {
 
   pw_addr = 0;
   pb_data = 0;
+
+  fetch(&rb_adh);
+  fetch(&rb_adl);
+
+  rw_prg_ctr = addr();
 }
 
 void Processor::readROM(const word addr, byte *dest) {
@@ -90,7 +99,7 @@ void Processor::push(byte *dest) {
 }
 
 void Processor::pop(byte *dest) {
-  pw_addr = rw_stk_ptr--;
+  pw_addr = --rw_stk_ptr;
   RW = READ;
   _RAM->update();
   *dest = pb_data;
@@ -104,7 +113,7 @@ void Processor::fetch(byte *dest) {
 }
 
 void Processor::set_operand() {
-  /* Bit 6 indicates whether the next bit has to be read */
+  /* Bit6 indicates whether the next bit has to be read */
   if (rb_ins[6]) {
     fetch(&rb_opd);
   }
@@ -118,57 +127,33 @@ void Processor::set_operand() {
 
 void Processor::exec_operation(bool is_jump) {
   if (is_jump) {
-    set_flag(JP, 0);
+    set_flag(IN, 0);
     if ((rb_ins & 0x0F) == 0x3) {
       if (!rb_ctr) {
         return;
       }
       rb_ctr--;
-      set_flag(JP, 1);
+      set_flag(IN, 1);
     } else {
       switch ((rb_ins & 0x0F)) {
       case 0: // unconditional jump
-        set_flag(JP, 1);
+        set_flag(IN, 1);
         break;
       case 1: // jump if not equal
-        set_flag(JP, get_flag(ZE));
+        set_flag(IN, get_flag(ZE));
         break;
       case 2: // jump if less than or equal to
-        set_flag(JP, (get_flag(OF) & !get_flag(ZE)));
+        set_flag(IN, (get_flag(OF) & !get_flag(ZE)));
         break;
       }
     }
 
-    if (get_flag(JP) ^ rb_ins[7]) {
-      rw_prg_ctr = addr() + 1;
+    if (get_flag(IN) ^ rb_ins[7]) {
+      rw_prg_ctr = addr();
     }
   } else {
-    if ((rb_ins & 0xFC) == 0x04) { // SWR
-      if ((rb_ins & 0x03) == 0x03) {
-        set_flag(TO, 0);
-        rb_aux = rb_ctr;
-        rb_ctr = (rw_timer & 0xFF);
-        rw_timer = (rw_timer & 0xFF00) | (rb_aux);
-        rb_aux = rb_acc;
-        rb_acc = (rw_timer >> 8) & 0xFF;
-        rw_timer = (rw_timer & 0x00FF) | (rb_aux << 8);
-      } else {
-        switch (rb_ins & 0x03) {
-        case 0:
-          rb_aux = rb_ctr;
-          rb_ctr = rb_acc;
-          break;
-        case 1:
-          rb_aux = rb_flg;
-          rb_flg = rb_acc;
-          break;
-        case 2:
-          rb_aux = pb_data;
-          pb_data = rb_acc;
-          break;
-        }
-        rb_acc = rb_aux;
-      }
+    if ((rb_ins & 0x1E) == 0x04) { // SWR
+      exec_SWR_operation();
     }
     switch (rb_ins & 0x0F) {
     case 0: // NOP
@@ -176,6 +161,62 @@ void Processor::exec_operation(bool is_jump) {
     default: // NOP
       return;
     }
+  }
+}
+
+void Processor::exec_SWR_operation() {
+  /* The IN flag is set if register 1 is 8-bit */
+  if ((rb_ins & 0xE0) == 0xE0) { // register 1 = address register
+    if (rb_ins[0]) {
+      return;
+    }
+
+    rb_aux = rb_adh;
+    rb_adh = rb_acc;
+    rb_acc = rb_aux;
+
+    rb_aux = rb_adl;
+    rb_adl = rb_ctr;
+    rb_ctr = rb_aux;
+
+    return;
+  }
+  switch ((rb_ins & 0xE0) >> 5) {
+  case 0:
+    rb_wrk = &rb_ctr;
+    break;
+  case 1:
+    rb_wrk = &rb_flg;
+    break;
+  case 2:
+    rw_wrk = &rw_stk_ptr;
+    break;
+  case 3:
+    rw_wrk = &rw_prg_ctr;
+    break;
+  case 4:
+    rw_wrk = &rw_timer;
+    break;
+  case 5:
+    rb_wrk = &pb_data;
+    break;
+  case 6:
+    rw_wrk = &pw_addr;
+    break;
+  }
+  rw_aux = *rw_wrk;
+  if (rb_ins[0]) {
+    if (rb_ins[1]) {
+      *rw_wrk = (rb_adh << 8) | rb_adl;
+    }
+    rb_adh = (rw_aux >> 8);
+    rb_adl = (rw_aux & 0xFF);
+  } else {
+    if (rb_ins[1]) {
+      *rw_wrk = (rb_acc << 8) | rb_ctr;
+    }
+    rb_acc = (rw_aux >> 8);
+    rb_ctr = (rw_aux & 0xFF);
   }
 }
 
@@ -194,6 +235,7 @@ void Processor::exec_operation() {
     }
     return;
   }
+
   /* For STV, the addressing modes work differently:
    * Stack addressing: this pushes from the working register
    * Direct and indirect addressing: these store the value of the working
@@ -315,6 +357,7 @@ void Processor::decode() {
       pop(rb_wrk);
     } else {
       rb_opd = 0;
+
       set_operand();
       exec_operation();
     }
@@ -322,7 +365,7 @@ void Processor::decode() {
   } else {
     rb_opd = 0x00;
     rb_wrk = &rb_acc;
-    exec_operation(rb_ins[5]);
+    exec_operation(is_JMP());
   }
 }
 
