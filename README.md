@@ -147,9 +147,11 @@ Immediate addressing is invalid for this instruciton and results in a NOP.
 The operand is loaded into the working register.
 
 #### `ADD` : ___1 1000
-**Add without carry.**\
+**Add without carry.**
+
 #### `ADC` : ___1 1001
-**Add with carry.**\
+**Add with carry.**
+
 #### `SUB` : ___1 1010
 **Subtract without carry.**\
 This is also used for comparison of two numbers:
@@ -158,13 +160,17 @@ This is also used for comparison of two numbers:
 - If the operand is larger than the register, the overflow flag is set.
 
 #### `SBC` : ___1 1011
-**Subtract with carry.**\
+**Subtract with carry.**
+
 #### `ORR` : ___1 1100
-**Logical OR.**\
+**Logical OR.**
+
 #### `AND` : ___1 1101
-**Logical AND.**\
+**Logical AND.**
+
 #### `XOR` : ___1 1110
-**Logical XOR/**\
+**Logical XOR.**
+
 #### `ROT` : ___1 1111
 **Bit-shift, rotate, increment, or decrement.**\
 This instruction operates on the working register. The last three bits of the operand determine the action:
@@ -173,7 +179,8 @@ This instruction operates on the working register. The last three bits of the op
 - `bit 2`: 1 = circular, 0 = not circular (no effect on increment or decrement)
 
 #### `JMP` : _010 0000
-**Jump unconditionally.**\
+**Jump unconditionally.**
+
 #### `JNE` : 0010 0001
 **Jump if not equal to.**\
 Jumps if the zero flag is set.
