@@ -1,4 +1,5 @@
 %{
+#include "rime.h"
 #include "rime.tab.h"
 
 #define MAX_LABEL_LEN 32
@@ -13,6 +14,8 @@ lit_bin {digit_bin}{8}[bB]?
 lit_hex {digit_hex}{1,2}[hH]?
 
 ORR OR{1,2}
+
+sw SW(ITCH)?
 
 addr_port ADD?R_?P(ORT)?
 data_port DATA?_?P(ORT)?
@@ -48,7 +51,11 @@ comment \%.*
 {ORR}   { return ORR; }
 "AND"   { return AND; }
 "XOR"   { return XOR; }
-"ROT"   { return ROT; }
+
+"INC"   { return INC; }
+"DEC"   { return DEC; }
+"LSH"   { return LSH; }
+"RSH"   { return RSH; }
 
 "JMP"   { return JMP; }
 "JNE"   { return JNE; }
@@ -73,6 +80,8 @@ comment \%.*
 "@ADR"  { return IND; }
 "&"     { return DIR; }
 
+{sw} { return SW; }
+
 {lit_hex} {
   yylval.lit_val = strtol(yytext, NULL, 16);
   return LIT;
@@ -88,7 +97,7 @@ comment \%.*
   return LABEL;
 }
 
-":" { return LABEL_DEF; }
+":" { return COL; }
 
 [ \t\n]+        { /* Ignore whitespace */ }
 .               { printf("Unknown token: %s\n", yytext); }

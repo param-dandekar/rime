@@ -9,9 +9,10 @@
 #include "util.h"
 
 #define ROM_SIZE 65536
-#define RAM_SIZE 256
+#define RAM_SIZE 65536
 
-#define MEM_PRT_LEN 18
+const int MEM_PRT_SRT = 0x00;
+const int MEM_PRT_END = 0x15;
 
 // using namespace std;
 
@@ -40,7 +41,7 @@ int main(int argc, char *argv[]) {
 
   std::cout << "    |";
 
-  for (int i = 0; i < MEM_PRT_LEN; i++) {
+  for (int i = MEM_PRT_SRT; i < MEM_PRT_END; i++) {
     std::cout << " " << std::hex << std::uppercase << std::setfill('0')
               << std::setw(2) << i;
   }
@@ -70,7 +71,7 @@ void print_registers() {
   }
 
   std::cout << "| ";
-  for (int i = 0; i < MEM_PRT_LEN; i++) {
+  for (int i = MEM_PRT_SRT; i < MEM_PRT_END; i++) {
     std::cout << a_RAM[i].hex() << ' ';
   }
 

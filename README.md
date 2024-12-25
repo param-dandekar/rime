@@ -87,7 +87,7 @@ For example:
 ```
 LDV #XX A // 0101 0110 : Load the literal value XX into A
 
-ADD @HL C // 1011 1000 : Add the value in RAM pointed to by the address registers, to C
+ADD @ADR C // 1011 1000 : Add the value in RAM pointed to by the address registers, to C
 
 ADR STK H // 0010 1000: Store value at the top of the stack in H
 ```
@@ -186,10 +186,10 @@ This is also used for comparison of two numbers:
 
 #### `ROT` : ___1 1111
 **Bit-shift, rotate, increment, or decrement.**\
-This instruction operates on the working register. The last three bits of the operand determine the action:
-- `bit 0`: 1 = right-shift/decrement, 0 = left-shift/increment
-- `bit 1`: 1 = shift/rotation, 0 = increment/decrement
-- `bit 2`: 1 = circular, 0 = not circular (no effect on increment or decrement)
+This instruction operates on the working register. Bits 6 and 7 of the instruction determine the action; bit 5 chooses the working register.
+
+- `bit 6`: 1 = right-shift/decrement, 0 = left-shift/increment
+- `bit 7`: 1 = shift/rotation, 0 = increment/decrement
 
 #### `JMP` : _010 0000
 **Jump unconditionally.**

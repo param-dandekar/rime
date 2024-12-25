@@ -31,11 +31,14 @@ const bool Processor::is_FLG() { return (rb_ins & 0x1C) == 0x0C; }
 /* True if instruction matches ___1 0110 */
 const bool Processor::is_STV() { return (rb_ins & 0x1F) == 0x16; }
 
-/* True if instruction matches ___1 0100 */
+/* True if instruction matches 00_1 0101 */
+const bool Processor::is_POP() { return (rb_ins & 0xDF) == 0x15; }
+
+/* True if instruction matches __01 0100 */
 const bool Processor::is_PSH() { return (rb_ins & 0x3F) == 0x14; }
 
-/* True if instruction matches ___1 0100 */
-const bool Processor::is_POP() { return (rb_ins & 0xDF) == 0x15; }
+/* True if instruction matches ___1 1111 */
+const bool Processor::is_ROT() { return (rb_ins & 0x1F) == 0x1F; }
 
 /* False if instruction matches ___1 010_ */
 const bool Processor::is_STK_op() { return (rb_ins & 0x1E) == 0x14; }
@@ -328,9 +331,9 @@ bool Processor::eval_overflow(word rw_aux) {
 }
 
 void Processor::exec_rotate() {
-  if (rb_opd[1]) {
+  if (rb_opd[7]) { // shift
   } else {
-    if (rb_opd[0]) {         // decrement
+    if (rb_ins[6]) {         // decrement
       if (*rb_wrk == 0x00) { // roll-over
         set_flag(OF, 1);
       }
@@ -342,6 +345,7 @@ void Processor::exec_rotate() {
       rb_aux = *rb_wrk + 1;
     }
   }
+  *rb_wrk = rb_aux;
 }
 
 void Processor::decode() {
@@ -355,6 +359,9 @@ void Processor::decode() {
 
     if (is_POP()) {
       pop(rb_wrk);
+      return;
+    } else if (is_ROT()) {
+      exec_rotate();
     } else {
       rb_opd = 0;
 

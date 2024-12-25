@@ -63,6 +63,7 @@ private:
   const bool is_STV();
   const bool is_POP();
   const bool is_PSH();
+  const bool is_ROT();
   const bool is_ALU_op();
   const bool is_STK_op();
 

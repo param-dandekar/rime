@@ -90,7 +90,7 @@ extern int yydebug;
     DP = 291,                      /* DP  */
     AP = 292,                      /* AP  */
     LABEL = 293,                   /* LABEL  */
-    LABEL_DEF = 294,               /* LABEL_DEF  */
+    COL = 294,                     /* COL  */
     DEF = 295,                     /* DEF  */
     FUN = 296,                     /* FUN  */
     RET = 297,                     /* RET  */
@@ -98,7 +98,13 @@ extern int yydebug;
     STK = 299,                     /* STK  */
     IMM = 300,                     /* IMM  */
     IND = 301,                     /* IND  */
-    DIR = 302                      /* DIR  */
+    DIR = 302,                     /* DIR  */
+    SW = 303,                      /* SW  */
+    INC = 304,                     /* INC  */
+    DEC = 305,                     /* DEC  */
+    LSH = 306,                     /* LSH  */
+    RSH = 307,                     /* RSH  */
+    CIR = 308                      /* CIR  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -107,13 +113,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 43 "rime.y"
+#line 77 "rime.y"
 
   unsigned char byte;
   unsigned char lit_val;
   char *label;
 
-#line 117 "rime.tab.h"
+#line 123 "rime.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
