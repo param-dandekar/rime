@@ -1,5 +1,6 @@
+#line 2 "src/rime/lexer.yy.c"
 
-#line 3 "lex.yy.c"
+#line 4 "src/rime/lexer.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -562,14 +563,14 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "rime.l"
-#line 2 "rime.l"
+#line 1 "src/rime/lexer.l"
+#line 2 "src/rime/lexer.l"
 #include "rime.h"
-#include "rime.tab.h"
+#include "parser.h"
 
 #define MAX_LABEL_LEN 32
-#line 572 "lex.yy.c"
-#line 573 "lex.yy.c"
+#line 573 "src/rime/lexer.yy.c"
+#line 574 "src/rime/lexer.yy.c"
 
 #define INITIAL 0
 
@@ -786,10 +787,10 @@ YY_DECL
 		}
 
 	{
-#line 25 "rime.l"
+#line 25 "src/rime/lexer.l"
 
 
-#line 793 "lex.yy.c"
+#line 794 "src/rime/lexer.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -848,237 +849,237 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 27 "rime.l"
+#line 27 "src/rime/lexer.l"
 { return START; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 29 "rime.l"
+#line 29 "src/rime/lexer.l"
 {}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 31 "rime.l"
+#line 31 "src/rime/lexer.l"
 { return DEF; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 32 "rime.l"
+#line 32 "src/rime/lexer.l"
 { return RET; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 33 "rime.l"
+#line 33 "src/rime/lexer.l"
 { return FUN; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 35 "rime.l"
+#line 35 "src/rime/lexer.l"
 { return NOP; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 36 "rime.l"
+#line 36 "src/rime/lexer.l"
 { return RST; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 38 "rime.l"
+#line 38 "src/rime/lexer.l"
 { return SWR; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 40 "rime.l"
+#line 40 "src/rime/lexer.l"
 { return ADR; }
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 41 "rime.l"
+#line 41 "src/rime/lexer.l"
 { return FLG; }
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 43 "rime.l"
+#line 43 "src/rime/lexer.l"
 { return PSH; }
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 44 "rime.l"
+#line 44 "src/rime/lexer.l"
 { return POP; }
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 45 "rime.l"
+#line 45 "src/rime/lexer.l"
 { return STV; }
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 46 "rime.l"
+#line 46 "src/rime/lexer.l"
 { return LDV; }
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 47 "rime.l"
+#line 47 "src/rime/lexer.l"
 { return ADD; }
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 48 "rime.l"
+#line 48 "src/rime/lexer.l"
 { return ADC; }
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 49 "rime.l"
+#line 49 "src/rime/lexer.l"
 { return SUB; }
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 50 "rime.l"
+#line 50 "src/rime/lexer.l"
 { return SBC; }
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 51 "rime.l"
+#line 51 "src/rime/lexer.l"
 { return ORR; }
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 52 "rime.l"
+#line 52 "src/rime/lexer.l"
 { return AND; }
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 53 "rime.l"
+#line 53 "src/rime/lexer.l"
 { return XOR; }
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 55 "rime.l"
+#line 55 "src/rime/lexer.l"
 { return INC; }
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 56 "rime.l"
+#line 56 "src/rime/lexer.l"
 { return DEC; }
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 57 "rime.l"
+#line 57 "src/rime/lexer.l"
 { return LSH; }
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 58 "rime.l"
+#line 58 "src/rime/lexer.l"
 { return RSH; }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 60 "rime.l"
+#line 60 "src/rime/lexer.l"
 { return JMP; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 61 "rime.l"
+#line 61 "src/rime/lexer.l"
 { return JNE; }
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 62 "rime.l"
+#line 62 "src/rime/lexer.l"
 { return JEQ; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 63 "rime.l"
+#line 63 "src/rime/lexer.l"
 { return JLT; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 64 "rime.l"
+#line 64 "src/rime/lexer.l"
 { return JGE; }
 	YY_BREAK
 case 31:
 YY_RULE_SETUP
-#line 65 "rime.l"
+#line 65 "src/rime/lexer.l"
 { return JDC; }
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 67 "rime.l"
+#line 67 "src/rime/lexer.l"
 { return ACC; }
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 68 "rime.l"
+#line 68 "src/rime/lexer.l"
 { return CTR; }
 	YY_BREAK
 case 34:
 YY_RULE_SETUP
-#line 69 "rime.l"
+#line 69 "src/rime/lexer.l"
 { return ADL; }
 	YY_BREAK
 case 35:
 YY_RULE_SETUP
-#line 70 "rime.l"
+#line 70 "src/rime/lexer.l"
 { return ADH; }
 	YY_BREAK
 case 36:
 YY_RULE_SETUP
-#line 71 "rime.l"
+#line 71 "src/rime/lexer.l"
 { return FRG; }
 	YY_BREAK
 case 37:
 YY_RULE_SETUP
-#line 72 "rime.l"
+#line 72 "src/rime/lexer.l"
 { return TMR; }
 	YY_BREAK
 case 38:
 YY_RULE_SETUP
-#line 73 "rime.l"
+#line 73 "src/rime/lexer.l"
 { return DP; }
 	YY_BREAK
 case 39:
 YY_RULE_SETUP
-#line 74 "rime.l"
+#line 74 "src/rime/lexer.l"
 { return AP; }
 	YY_BREAK
 case 40:
 YY_RULE_SETUP
-#line 75 "rime.l"
+#line 75 "src/rime/lexer.l"
 { return SP;  }
 	YY_BREAK
 case 41:
 YY_RULE_SETUP
-#line 76 "rime.l"
+#line 76 "src/rime/lexer.l"
 { return PC;  }
 	YY_BREAK
 case 42:
 YY_RULE_SETUP
-#line 78 "rime.l"
+#line 78 "src/rime/lexer.l"
 { return STK; }
 	YY_BREAK
 case 43:
 YY_RULE_SETUP
-#line 79 "rime.l"
+#line 79 "src/rime/lexer.l"
 { return IMM; }
 	YY_BREAK
 case 44:
 YY_RULE_SETUP
-#line 80 "rime.l"
+#line 80 "src/rime/lexer.l"
 { return IND; }
 	YY_BREAK
 case 45:
 YY_RULE_SETUP
-#line 81 "rime.l"
+#line 81 "src/rime/lexer.l"
 { return DIR; }
 	YY_BREAK
 case 46:
 YY_RULE_SETUP
-#line 83 "rime.l"
+#line 83 "src/rime/lexer.l"
 { return SW; }
 	YY_BREAK
 case 47:
 YY_RULE_SETUP
-#line 85 "rime.l"
+#line 85 "src/rime/lexer.l"
 {
   yylval.lit_val = strtol(yytext, NULL, 16);
   return LIT;
@@ -1086,7 +1087,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 48:
 YY_RULE_SETUP
-#line 90 "rime.l"
+#line 90 "src/rime/lexer.l"
 {
   yylval.lit_val = strtol(yytext, NULL, 2);
   return LIT;
@@ -1094,7 +1095,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 49:
 YY_RULE_SETUP
-#line 95 "rime.l"
+#line 95 "src/rime/lexer.l"
 {
   yylval.label = strdup(yytext);
   return LABEL;
@@ -1102,30 +1103,30 @@ YY_RULE_SETUP
 	YY_BREAK
 case 50:
 YY_RULE_SETUP
-#line 100 "rime.l"
+#line 100 "src/rime/lexer.l"
 { return COL; }
 	YY_BREAK
 case 51:
 /* rule 51 can match eol */
 YY_RULE_SETUP
-#line 102 "rime.l"
+#line 102 "src/rime/lexer.l"
 { /* Ignore whitespace */ }
 	YY_BREAK
 case 52:
 YY_RULE_SETUP
-#line 103 "rime.l"
+#line 103 "src/rime/lexer.l"
 { printf("Unknown token: %s\n", yytext); }
 	YY_BREAK
 case YY_STATE_EOF(INITIAL):
-#line 105 "rime.l"
+#line 105 "src/rime/lexer.l"
 { return END; }
 	YY_BREAK
 case 53:
 YY_RULE_SETUP
-#line 107 "rime.l"
+#line 107 "src/rime/lexer.l"
 ECHO;
 	YY_BREAK
-#line 1129 "lex.yy.c"
+#line 1130 "src/rime/lexer.yy.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2128,7 +2129,144 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 107 "rime.l"
+#line 107 "src/rime/lexer.l"
 
 int yywrap() { return 1; }
+/* A Bison parser, made by GNU Bison 3.8.2.  */
+
+/* Bison interface for Yacc-like parsers in C
+
+   Copyright (C) 1984, 1989-1990, 2000-2015, 2018-2021 Free Software Foundation,
+   Inc.
+
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <https://www.gnu.org/licenses/>.  */
+
+/* As a special exception, you may create a larger work that contains
+   part or all of the Bison parser skeleton and distribute that work
+   under terms of your choice, so long as that work isn't itself a
+   parser generator using the skeleton or a modified version thereof
+   as a parser skeleton.  Alternatively, if you modify or redistribute
+   the parser skeleton itself, you may (at your option) remove this
+   special exception, which will cause the skeleton and the resulting
+   Bison output files to be licensed under the GNU General Public
+   License without this special exception.
+
+   This special exception was added by the Free Software Foundation in
+   version 2.2 of Bison.  */
+
+/* DO NOT RELY ON FEATURES THAT ARE NOT DOCUMENTED in the manual,
+   especially those whose name start with YY_ or yy_.  They are
+   private implementation details that can be changed or removed.  */
+
+#ifndef YY_YY_INCLUDE_RIME_PARSER_H_INCLUDED
+# define YY_YY_INCLUDE_RIME_PARSER_H_INCLUDED
+/* Debug traces.  */
+#ifndef YYDEBUG
+# define YYDEBUG 0
+#endif
+#if YYDEBUG
+extern int yydebug;
+#endif
+
+/* Token kinds.  */
+#ifndef YYTOKENTYPE
+# define YYTOKENTYPE
+  enum yytokentype
+  {
+    YYEMPTY = -2,
+    YYEOF = 0,                     /* "end of file"  */
+    YYerror = 256,                 /* error  */
+    YYUNDEF = 257,                 /* "invalid token"  */
+    START = 258,                   /* START  */
+    END = 259,                     /* END  */
+    NOP = 260,                     /* NOP  */
+    RST = 261,                     /* RST  */
+    SWR = 262,                     /* SWR  */
+    FLG = 263,                     /* FLG  */
+    ADR = 264,                     /* ADR  */
+    PSH = 265,                     /* PSH  */
+    POP = 266,                     /* POP  */
+    STV = 267,                     /* STV  */
+    LDV = 268,                     /* LDV  */
+    ADD = 269,                     /* ADD  */
+    ADC = 270,                     /* ADC  */
+    SUB = 271,                     /* SUB  */
+    SBC = 272,                     /* SBC  */
+    ORR = 273,                     /* ORR  */
+    AND = 274,                     /* AND  */
+    XOR = 275,                     /* XOR  */
+    ROT = 276,                     /* ROT  */
+    JMP = 277,                     /* JMP  */
+    JNE = 278,                     /* JNE  */
+    JEQ = 279,                     /* JEQ  */
+    JLT = 280,                     /* JLT  */
+    JGE = 281,                     /* JGE  */
+    JDC = 282,                     /* JDC  */
+    ACC = 283,                     /* ACC  */
+    CTR = 284,                     /* CTR  */
+    ADH = 285,                     /* ADH  */
+    ADL = 286,                     /* ADL  */
+    TMR = 287,                     /* TMR  */
+    FRG = 288,                     /* FRG  */
+    SP = 289,                      /* SP  */
+    PC = 290,                      /* PC  */
+    DP = 291,                      /* DP  */
+    AP = 292,                      /* AP  */
+    LABEL = 293,                   /* LABEL  */
+    COL = 294,                     /* COL  */
+    DEF = 295,                     /* DEF  */
+    FUN = 296,                     /* FUN  */
+    RET = 297,                     /* RET  */
+    LIT = 298,                     /* LIT  */
+    STK = 299,                     /* STK  */
+    IMM = 300,                     /* IMM  */
+    IND = 301,                     /* IND  */
+    DIR = 302,                     /* DIR  */
+    SW = 303,                      /* SW  */
+    INC = 304,                     /* INC  */
+    DEC = 305,                     /* DEC  */
+    LSH = 306,                     /* LSH  */
+    RSH = 307,                     /* RSH  */
+    CIR = 308                      /* CIR  */
+  };
+  typedef enum yytokentype yytoken_kind_t;
+#endif
+
+/* Value type.  */
+#if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
+union YYSTYPE
+{
+#line 78 "src/rime/parser.y"
+
+  unsigned char byte;
+  unsigned char lit_val;
+  char *label;
+
+#line 123 "include/rime/parser.h"
+
+};
+typedef union YYSTYPE YYSTYPE;
+# define YYSTYPE_IS_TRIVIAL 1
+# define YYSTYPE_IS_DECLARED 1
+#endif
+
+
+extern YYSTYPE yylval;
+
+
+int yyparse (void);
+
+
+#endif /* !YY_YY_INCLUDE_RIME_PARSER_H_INCLUDED  */
 

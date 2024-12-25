@@ -9,6 +9,7 @@
 #define MAX_LABELS 256
 #define PROGRAM_SIZE 65536
 
+#define PROGRAM_START_ADDR 0x02
 #define FUNC_CALL_OFFSET 0x07
 
 typedef enum CompilerPass_e {
@@ -35,7 +36,7 @@ typedef unsigned char byte_t;
 
 byte_t program[PROGRAM_SIZE] = {0};
 
-unsigned int line_num = 2;
+unsigned int line_num = PROGRAM_START_ADDR;
 
 typedef struct label_t {
   char name[MAX_LABEL_LEN];
@@ -248,52 +249,44 @@ void generate_instruction(InstructionType type,
   }
 }
 
-void parse_op0(byte_t opcode) {
+void parse_line(byte_t opcode) {
   if (pass == SECOND) { program[line_num] = (opcode); }
-  line_num++;
+  ++line_num;
+}
+
+void parse_op0(byte_t opcode) {
+  parse_line(opcode);
 }
 
 void parse_jmp(byte_t opcode, int jump_to) {
-  if (pass == SECOND) { program[line_num] = (0x08 | (3 << 5)); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = ((jump_to >> 8)); } // Setting ADH
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x08 | (2 << 5)); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = ((jump_to & 0xFF)); } // Setting ADL
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (opcode); }
-  line_num++;
+  parse_line(0x08 | (3 << 5));
+  parse_line((jump_to >> 8)); // Setting ADH
+  parse_line(0x08 | (2 << 5));
+  parse_line((jump_to & 0xFF)); // Setting ADL
+  parse_line(opcode);
 }
 
 void parse_swr(byte_t opcode, byte_t rg1_spec, byte_t rg2_spec, byte_t sw) {
-  if (pass == SECOND) { program[line_num] = (opcode | (rg1_spec << 5) | (sw << 1) | rg2_spec); }
-  line_num++;
+  parse_line(opcode | (rg1_spec << 5) | (sw << 1) | rg2_spec);
 }
 
 void parse_flg(byte_t opcode, byte_t operand, byte_t flg_spec) {
-  if (pass == SECOND) { program[line_num] = (opcode | (operand << 6) | flg_spec); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (yylval.lit_val); }
-  line_num++;
+  parse_line(opcode | (operand << 6) | flg_spec);
+  parse_line(yylval.lit_val);
 }
 
 void parse_reg_psh(byte_t reg_spec) {
-  if (pass == SECOND) { program[line_num] = (0x16 | (reg_spec << 5)); }
-  line_num++;
+  parse_line(0x16 | (reg_spec << 5));
 }
 
 void parse_rot(byte_t opcode, byte_t reg_spec) {
-  if (pass == SECOND) { program[line_num] = (opcode | (reg_spec << 5)); }
-  line_num++;
+  parse_line(opcode | (reg_spec << 5));
 }
 
 void parse_op2(byte_t opcode, byte_t operand, byte_t reg_spec) {
-  if (pass == SECOND) { program[line_num] = (opcode | (operand << 6) | (reg_spec << 5)); }
-  line_num++;
+  parse_line(opcode | (operand << 6) | (reg_spec << 5));
   if (operand & 1) {
-    if (pass == SECOND) { program[line_num] = (yylval.lit_val); }
-  line_num++;
+    parse_line(yylval.lit_val);
   }
 }
 
@@ -315,42 +308,26 @@ int get_label_value() {
 }
 
 void func_call() {
-  if (pass == SECOND) { program[line_num] = (0x16); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x36); } // push registers onto stack
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x64); } // get current address
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x16); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x36); } // push current address on stack (high byte first)
-  line_num++;
+  parse_line(0x16);
+  parse_line(0x36); // push registers onto stack
+  parse_line(0x64); // get current address
+  parse_line(0x16);
+  parse_line(0x36); // push current address on stack (high byte first)
   parse_jmp(0x20, get_label_value()); // jump to label
-  if (pass == SECOND) { program[line_num] = (0x35); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x15); } // restore register state
-  line_num++;
+  parse_line(0x35);
+  parse_line(0x15); // restore register state
 }
 
 void func_return() {
-  if (pass == SECOND) { program[line_num] = (0xE4); } // store result in address register
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x35); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x15); } // pop return address
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x78); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (FUNC_CALL_OFFSET); } // add offset to address
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x58); } // to skip function call
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x00); } // propagate carry
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0xE4); } // write return address to address register
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x20); } // jump to label
-  line_num++;
+  parse_line(0xE4); // store result in address register
+  parse_line(0x35);
+  parse_line(0x15); // pop return address
+  parse_line(0x78);
+  parse_line(FUNC_CALL_OFFSET); // add offset to address
+  parse_line(0x58); // to skip function call
+  parse_line(0x00); // propagate carry
+  parse_line(0xE4); // write return address to address register
+  parse_line(0x20); // jump to label
 }
 
 void set_start() {
@@ -369,7 +346,7 @@ void print_info() {
   fprintf(stderr, "Labels:\n");
 
   for (int i = 0; i < label_count; i++) {
-    fprintf(stderr, "%s at %d\n", labels[i].name, labels[i].value);
+    fprintf(stderr, "%04X: %s\n", labels[i].value, labels[i].name);
   }
 }
 
@@ -390,7 +367,7 @@ int main(int argc, char* argv[]) {
   yyparse();
 
   print_info();
-  line_num = 0;
+  line_num = PROGRAM_START_ADDR;
 
   yyrestart(yyin);
   rewind(yyin);

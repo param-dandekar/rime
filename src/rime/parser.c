@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "rime.y"
+#line 1 "src/rime/parser.y"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -144,7 +144,7 @@ void func_return();
 void set_start();
 void set_end();
 
-#line 148 "rime.tab.c"
+#line 148 "src/rime/parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -167,7 +167,7 @@ void set_end();
 #  endif
 # endif
 
-#include "rime.tab.h"
+#include "parser.h"
 /* Symbol kind.  */
 enum yysymbol_kind_t
 {
@@ -1266,397 +1266,397 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: program START COL  */
-#line 110 "rime.y"
+#line 110 "src/rime/parser.y"
                             { set_start(); }
-#line 1272 "rime.tab.c"
+#line 1272 "src/rime/parser.c"
     break;
 
   case 8: /* program: program END  */
-#line 116 "rime.y"
+#line 116 "src/rime/parser.y"
                             { YYACCEPT; }
-#line 1278 "rime.tab.c"
+#line 1278 "src/rime/parser.c"
     break;
 
   case 10: /* ins: op0  */
-#line 119 "rime.y"
+#line 119 "src/rime/parser.y"
                                 { generate_instruction(INS_OP0, (yyvsp[0].byte), 0, 0, 0);     }
-#line 1284 "rime.tab.c"
+#line 1284 "src/rime/parser.c"
     break;
 
   case 11: /* ins: jmp LABEL  */
-#line 120 "rime.y"
+#line 120 "src/rime/parser.y"
                                 { generate_instruction(INS_JMP_LBL, (yyvsp[-1].byte), 0, 0, 0); }
-#line 1290 "rime.tab.c"
+#line 1290 "src/rime/parser.c"
     break;
 
   case 12: /* ins: jmp ADR  */
-#line 121 "rime.y"
+#line 121 "src/rime/parser.y"
                                 { generate_instruction(INS_JMP_ADR, (yyvsp[-1].byte), 0, 0, 0); }
-#line 1296 "rime.tab.c"
+#line 1296 "src/rime/parser.c"
     break;
 
   case 13: /* ins: swr rg1_spec rg2_spec sw  */
-#line 122 "rime.y"
+#line 122 "src/rime/parser.y"
                                 { generate_instruction(INS_SWR, (yyvsp[-3].byte), (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte));  }
-#line 1302 "rime.tab.c"
+#line 1302 "src/rime/parser.c"
     break;
 
   case 14: /* ins: flg adr_spec flg_spec  */
-#line 123 "rime.y"
+#line 123 "src/rime/parser.y"
                                 { generate_instruction(INS_FLG, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1308 "rime.tab.c"
+#line 1308 "src/rime/parser.c"
     break;
 
   case 15: /* ins: PSH wrk_reg  */
-#line 124 "rime.y"
+#line 124 "src/rime/parser.y"
                                 { generate_instruction(INS_PSH, (yyvsp[0].byte), 0, 0, 0);     }
-#line 1314 "rime.tab.c"
+#line 1314 "src/rime/parser.c"
     break;
 
   case 16: /* ins: pop wrk_reg  */
-#line 125 "rime.y"
+#line 125 "src/rime/parser.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-1].byte), 0, (yyvsp[0].byte), 0);    }
-#line 1320 "rime.tab.c"
+#line 1320 "src/rime/parser.c"
     break;
 
   case 17: /* ins: adr adr_spec adr_reg  */
-#line 126 "rime.y"
+#line 126 "src/rime/parser.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1326 "rime.tab.c"
+#line 1326 "src/rime/parser.c"
     break;
 
   case 18: /* ins: rot wrk_reg  */
-#line 127 "rime.y"
+#line 127 "src/rime/parser.y"
                                 { generate_instruction(INS_ROT, (yyvsp[-1].byte), (yyvsp[0].byte), 0, 0);    }
-#line 1332 "rime.tab.c"
+#line 1332 "src/rime/parser.c"
     break;
 
   case 19: /* ins: op2 adr_spec wrk_reg  */
-#line 128 "rime.y"
+#line 128 "src/rime/parser.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1338 "rime.tab.c"
+#line 1338 "src/rime/parser.c"
     break;
 
   case 20: /* label: LABEL COL  */
-#line 130 "rime.y"
+#line 130 "src/rime/parser.y"
                   { if (pass == FIRST) { add_label(); } }
-#line 1344 "rime.tab.c"
+#line 1344 "src/rime/parser.c"
     break;
 
   case 21: /* func_def: DEF LABEL COL  */
-#line 132 "rime.y"
+#line 132 "src/rime/parser.y"
                           { add_label();    }
-#line 1350 "rime.tab.c"
+#line 1350 "src/rime/parser.c"
     break;
 
   case 22: /* func_ret: RET  */
-#line 133 "rime.y"
+#line 133 "src/rime/parser.y"
                           { func_return();  }
-#line 1356 "rime.tab.c"
+#line 1356 "src/rime/parser.c"
     break;
 
   case 23: /* func_call: FUN LABEL  */
-#line 134 "rime.y"
+#line 134 "src/rime/parser.y"
                           { func_call();    }
-#line 1362 "rime.tab.c"
+#line 1362 "src/rime/parser.c"
     break;
 
   case 24: /* op0: NOP  */
-#line 136 "rime.y"
+#line 136 "src/rime/parser.y"
           { (yyval.byte) = 0x00; }
-#line 1368 "rime.tab.c"
+#line 1368 "src/rime/parser.c"
     break;
 
   case 25: /* op0: RST  */
-#line 137 "rime.y"
+#line 137 "src/rime/parser.y"
           { (yyval.byte) = 0x01; }
-#line 1374 "rime.tab.c"
+#line 1374 "src/rime/parser.c"
     break;
 
   case 26: /* jmp: JMP  */
-#line 139 "rime.y"
+#line 139 "src/rime/parser.y"
           { (yyval.byte) = 0x20; }
-#line 1380 "rime.tab.c"
+#line 1380 "src/rime/parser.c"
     break;
 
   case 27: /* jmp: JNE  */
-#line 140 "rime.y"
+#line 140 "src/rime/parser.y"
           { (yyval.byte) = 0x21; }
-#line 1386 "rime.tab.c"
+#line 1386 "src/rime/parser.c"
     break;
 
   case 28: /* jmp: JEQ  */
-#line 141 "rime.y"
+#line 141 "src/rime/parser.y"
           { (yyval.byte) = 0xA1; }
-#line 1392 "rime.tab.c"
+#line 1392 "src/rime/parser.c"
     break;
 
   case 29: /* jmp: JLT  */
-#line 142 "rime.y"
+#line 142 "src/rime/parser.y"
           { (yyval.byte) = 0x22; }
-#line 1398 "rime.tab.c"
+#line 1398 "src/rime/parser.c"
     break;
 
   case 30: /* jmp: JGE  */
-#line 143 "rime.y"
+#line 143 "src/rime/parser.y"
           { (yyval.byte) = 0xA2; }
-#line 1404 "rime.tab.c"
+#line 1404 "src/rime/parser.c"
     break;
 
   case 31: /* jmp: JDC  */
-#line 144 "rime.y"
+#line 144 "src/rime/parser.y"
           { (yyval.byte) = 0x23; }
-#line 1410 "rime.tab.c"
+#line 1410 "src/rime/parser.c"
     break;
 
   case 32: /* swr: SWR  */
-#line 146 "rime.y"
+#line 146 "src/rime/parser.y"
           { (yyval.byte) = 0x04; }
-#line 1416 "rime.tab.c"
+#line 1416 "src/rime/parser.c"
     break;
 
   case 33: /* sw: SW  */
-#line 148 "rime.y"
+#line 148 "src/rime/parser.y"
          { (yyval.byte) = 1; }
-#line 1422 "rime.tab.c"
+#line 1422 "src/rime/parser.c"
     break;
 
   case 34: /* sw: %empty  */
-#line 149 "rime.y"
+#line 149 "src/rime/parser.y"
          { (yyval.byte) = 0; }
-#line 1428 "rime.tab.c"
+#line 1428 "src/rime/parser.c"
     break;
 
   case 35: /* flg: FLG  */
-#line 151 "rime.y"
+#line 151 "src/rime/parser.y"
           { (yyval.byte) = 0x0C; }
-#line 1434 "rime.tab.c"
+#line 1434 "src/rime/parser.c"
     break;
 
   case 36: /* adr: ADR  */
-#line 153 "rime.y"
+#line 153 "src/rime/parser.y"
           { (yyval.byte) = 0x08; }
-#line 1440 "rime.tab.c"
+#line 1440 "src/rime/parser.c"
     break;
 
   case 37: /* pop: POP  */
-#line 155 "rime.y"
+#line 155 "src/rime/parser.y"
           { (yyval.byte) = 0x15; }
-#line 1446 "rime.tab.c"
+#line 1446 "src/rime/parser.c"
     break;
 
   case 38: /* op2: PSH  */
-#line 157 "rime.y"
+#line 157 "src/rime/parser.y"
           { (yyval.byte) = 0x14; }
-#line 1452 "rime.tab.c"
+#line 1452 "src/rime/parser.c"
     break;
 
   case 39: /* op2: STV  */
-#line 158 "rime.y"
+#line 158 "src/rime/parser.y"
           { (yyval.byte) = 0x16; }
-#line 1458 "rime.tab.c"
+#line 1458 "src/rime/parser.c"
     break;
 
   case 40: /* op2: LDV  */
-#line 159 "rime.y"
+#line 159 "src/rime/parser.y"
           { (yyval.byte) = 0x17; }
-#line 1464 "rime.tab.c"
+#line 1464 "src/rime/parser.c"
     break;
 
   case 41: /* op2: ADD  */
-#line 160 "rime.y"
+#line 160 "src/rime/parser.y"
           { (yyval.byte) = 0x18; }
-#line 1470 "rime.tab.c"
+#line 1470 "src/rime/parser.c"
     break;
 
   case 42: /* op2: ADC  */
-#line 161 "rime.y"
+#line 161 "src/rime/parser.y"
           { (yyval.byte) = 0x19; }
-#line 1476 "rime.tab.c"
+#line 1476 "src/rime/parser.c"
     break;
 
   case 43: /* op2: SUB  */
-#line 162 "rime.y"
+#line 162 "src/rime/parser.y"
           { (yyval.byte) = 0x1A; }
-#line 1482 "rime.tab.c"
+#line 1482 "src/rime/parser.c"
     break;
 
   case 44: /* op2: SBC  */
-#line 163 "rime.y"
+#line 163 "src/rime/parser.y"
           { (yyval.byte) = 0x1B; }
-#line 1488 "rime.tab.c"
+#line 1488 "src/rime/parser.c"
     break;
 
   case 45: /* op2: ORR  */
-#line 164 "rime.y"
+#line 164 "src/rime/parser.y"
           { (yyval.byte) = 0x1C; }
-#line 1494 "rime.tab.c"
+#line 1494 "src/rime/parser.c"
     break;
 
   case 46: /* op2: AND  */
-#line 165 "rime.y"
+#line 165 "src/rime/parser.y"
           { (yyval.byte) = 0x1D; }
-#line 1500 "rime.tab.c"
+#line 1500 "src/rime/parser.c"
     break;
 
   case 47: /* op2: XOR  */
-#line 166 "rime.y"
+#line 166 "src/rime/parser.y"
           { (yyval.byte) = 0x1E; }
-#line 1506 "rime.tab.c"
+#line 1506 "src/rime/parser.c"
     break;
 
   case 48: /* rot: INC  */
-#line 169 "rime.y"
+#line 169 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (0 << 6); }
-#line 1512 "rime.tab.c"
+#line 1512 "src/rime/parser.c"
     break;
 
   case 49: /* rot: DEC  */
-#line 170 "rime.y"
+#line 170 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (1 << 6); }
-#line 1518 "rime.tab.c"
+#line 1518 "src/rime/parser.c"
     break;
 
   case 50: /* rot: LSH  */
-#line 171 "rime.y"
+#line 171 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (2 << 6); }
-#line 1524 "rime.tab.c"
+#line 1524 "src/rime/parser.c"
     break;
 
   case 51: /* rot: RSH  */
-#line 172 "rime.y"
+#line 172 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (3 << 6); }
-#line 1530 "rime.tab.c"
+#line 1530 "src/rime/parser.c"
     break;
 
   case 52: /* flg_spec: AND  */
-#line 174 "rime.y"
+#line 174 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1536 "rime.tab.c"
+#line 1536 "src/rime/parser.c"
     break;
 
   case 53: /* flg_spec: ORR  */
-#line 175 "rime.y"
+#line 175 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1542 "rime.tab.c"
+#line 1542 "src/rime/parser.c"
     break;
 
   case 54: /* flg_spec: XOR  */
-#line 176 "rime.y"
+#line 176 "src/rime/parser.y"
               { (yyval.byte) = 2; }
-#line 1548 "rime.tab.c"
+#line 1548 "src/rime/parser.c"
     break;
 
   case 55: /* rg1_spec: CTR  */
-#line 178 "rime.y"
+#line 178 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1554 "rime.tab.c"
+#line 1554 "src/rime/parser.c"
     break;
 
   case 56: /* rg1_spec: FRG  */
-#line 179 "rime.y"
+#line 179 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1560 "rime.tab.c"
+#line 1560 "src/rime/parser.c"
     break;
 
   case 57: /* rg1_spec: SP  */
-#line 180 "rime.y"
+#line 180 "src/rime/parser.y"
               { (yyval.byte) = 2; }
-#line 1566 "rime.tab.c"
+#line 1566 "src/rime/parser.c"
     break;
 
   case 58: /* rg1_spec: PC  */
-#line 181 "rime.y"
+#line 181 "src/rime/parser.y"
               { (yyval.byte) = 3; }
-#line 1572 "rime.tab.c"
+#line 1572 "src/rime/parser.c"
     break;
 
   case 59: /* rg1_spec: TMR  */
-#line 182 "rime.y"
+#line 182 "src/rime/parser.y"
               { (yyval.byte) = 4; }
-#line 1578 "rime.tab.c"
+#line 1578 "src/rime/parser.c"
     break;
 
   case 60: /* rg1_spec: DP  */
-#line 183 "rime.y"
+#line 183 "src/rime/parser.y"
               { (yyval.byte) = 5; }
-#line 1584 "rime.tab.c"
+#line 1584 "src/rime/parser.c"
     break;
 
   case 61: /* rg1_spec: AP  */
-#line 184 "rime.y"
+#line 184 "src/rime/parser.y"
               { (yyval.byte) = 6; }
-#line 1590 "rime.tab.c"
+#line 1590 "src/rime/parser.c"
     break;
 
   case 62: /* rg1_spec: ADR  */
-#line 185 "rime.y"
+#line 185 "src/rime/parser.y"
               { (yyval.byte) = 7; }
-#line 1596 "rime.tab.c"
+#line 1596 "src/rime/parser.c"
     break;
 
   case 63: /* rg2_spec: ACC  */
-#line 187 "rime.y"
+#line 187 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1602 "rime.tab.c"
+#line 1602 "src/rime/parser.c"
     break;
 
   case 64: /* rg2_spec: ADR  */
-#line 188 "rime.y"
+#line 188 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1608 "rime.tab.c"
+#line 1608 "src/rime/parser.c"
     break;
 
   case 65: /* adr_spec: STK  */
-#line 190 "rime.y"
+#line 190 "src/rime/parser.y"
                   { (yyval.byte) = 0; }
-#line 1614 "rime.tab.c"
+#line 1614 "src/rime/parser.c"
     break;
 
   case 66: /* adr_spec: IMM LIT  */
-#line 191 "rime.y"
+#line 191 "src/rime/parser.y"
                   { (yyval.byte) = 1; }
-#line 1620 "rime.tab.c"
+#line 1620 "src/rime/parser.c"
     break;
 
   case 67: /* adr_spec: IND  */
-#line 192 "rime.y"
+#line 192 "src/rime/parser.y"
                   { (yyval.byte) = 2; }
-#line 1626 "rime.tab.c"
+#line 1626 "src/rime/parser.c"
     break;
 
   case 68: /* adr_spec: DIR LIT  */
-#line 193 "rime.y"
+#line 193 "src/rime/parser.y"
                   { (yyval.byte) = 3; }
-#line 1632 "rime.tab.c"
+#line 1632 "src/rime/parser.c"
     break;
 
   case 69: /* wrk_reg: ACC  */
-#line 195 "rime.y"
+#line 195 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1638 "rime.tab.c"
+#line 1638 "src/rime/parser.c"
     break;
 
   case 70: /* wrk_reg: CTR  */
-#line 196 "rime.y"
+#line 196 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1644 "rime.tab.c"
+#line 1644 "src/rime/parser.c"
     break;
 
   case 71: /* adr_reg: ADL  */
-#line 197 "rime.y"
+#line 197 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1650 "rime.tab.c"
+#line 1650 "src/rime/parser.c"
     break;
 
   case 72: /* adr_reg: ADH  */
-#line 198 "rime.y"
+#line 198 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1656 "rime.tab.c"
+#line 1656 "src/rime/parser.c"
     break;
 
 
-#line 1660 "rime.tab.c"
+#line 1660 "src/rime/parser.c"
 
       default: break;
     }
@@ -1849,7 +1849,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 199 "rime.y"
+#line 199 "src/rime/parser.y"
 
 
 // Parsing rules

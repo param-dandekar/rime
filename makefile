@@ -1,28 +1,32 @@
-PARSER="rime"
-LEXER="rime"
-COMPILER="rimec"
+ASSM_SRC_DIR=src/rime
+ASSM_INC_DIR=include/rime
+
+PARSER=parser
+LEXER=lexer
+
+PARSER_OUT=${ASSM_SRC_DIR}/${PARSER}.c
+LEXER_OUT=${ASSM_SRC_DIR}/${LEXER}.yy.c
+
+ASSM_EXEC=rc
 
 default: all
 
 all: build
 
-.PHONY: build clean-all clean-build clean-compiler debug reconfig compiler
+.PHONY: build clean-all clean-build clean-assembler debug reconfig assembler
 
 build:
 	make -C ./build VERBOSE=1
 
-compiler:
-	cd src/${COMPILER} &&\
-	bison -d ${PARSER}.y &&\
-	flex ${LEXER}.l &&\
-	gcc -o ../../${COMPILER} ${PARSER}.tab.c lex.yy.c -lfl
+assembler:
+	bison --output=${PARSER_OUT} --defines=${ASSM_INC_DIR}/${PARSER}.h ${ASSM_SRC_DIR}/${PARSER}.y
+	flex --outfile=${LEXER_OUT} ${ASSM_SRC_DIR}/${LEXER}.l ${ASSM_INC_DIR}/${PARSER}.h
+	gcc -o ${ASSM_EXEC} -I ${ASSM_INC_DIR} ${PARSER_OUT} ${LEXER_OUT} -lfl
 
-clean-all: clean-build clean-compiler
+clean-all: clean-build clean-assembler
 
-clean-compiler:
-	cd src/${COMPILER} &&\
-	rm -f ${PARSER}.tab.* lex.* &&\
-	rm -f ${COMPILER}
+clean-assembler:
+	rm -f ${ASSM_EXEC} ${PARSER_OUT} ${LEXER_OUT}
 
 clean-build:
 	make -C ./build clean
