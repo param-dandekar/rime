@@ -113,7 +113,7 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 77 "rime.y"
+#line 78 "rime.y"
 
   unsigned char byte;
   unsigned char lit_val;

@@ -11,8 +11,8 @@
 #define ROM_SIZE 65536
 #define RAM_SIZE 65536
 
-const int MEM_PRT_SRT = 0x00;
-const int MEM_PRT_END = 0x15;
+int MEM_PRT_SRT = 0;
+int MEM_PRT_END = 0;
 
 // using namespace std;
 
@@ -36,6 +36,8 @@ int main(int argc, char *argv[]) {
   p.reset();
 
   int iter = atoi(argv[1]);
+  MEM_PRT_SRT = atoi(argv[2]);
+  MEM_PRT_END = atoi(argv[3]);
 
   std::cout << "FR PC    SP    INS   H  L  A  C  TMR   A8 A16   DP AP";
 
@@ -49,10 +51,12 @@ int main(int argc, char *argv[]) {
   std::cout << std::endl;
 
   for (int i = 0; i < iter; i++) {
-    p.get_registers(registers);
-    print_registers();
+    //    p.get_registers(registers);
+    //    print_registers();
     p.cycle();
   }
+  p.get_registers(registers);
+  print_registers();
 
   return 0;
 }

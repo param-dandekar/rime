@@ -79,6 +79,7 @@
 #define MAX_LABELS 256
 #define PROGRAM_SIZE 65536
 
+#define PROGRAM_START_ADDR 0x02
 #define FUNC_CALL_OFFSET 0x07
 
 typedef enum CompilerPass_e {
@@ -105,7 +106,7 @@ typedef unsigned char byte_t;
 
 byte_t program[PROGRAM_SIZE] = {0};
 
-unsigned int line_num = 2;
+unsigned int line_num = PROGRAM_START_ADDR;
 
 typedef struct label_t {
   char name[MAX_LABEL_LEN];
@@ -143,7 +144,7 @@ void func_return();
 void set_start();
 void set_end();
 
-#line 147 "rime.tab.c"
+#line 148 "rime.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -637,14 +638,14 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   109,   109,   110,   111,   112,   113,   114,   115,   116,
-     118,   119,   120,   121,   122,   123,   124,   125,   126,   127,
-     129,   131,   132,   133,   135,   136,   138,   139,   140,   141,
-     142,   143,   145,   147,   148,   150,   152,   154,   156,   157,
-     158,   159,   160,   161,   162,   163,   164,   165,   168,   169,
-     170,   171,   173,   174,   175,   177,   178,   179,   180,   181,
-     182,   183,   184,   186,   187,   189,   190,   191,   192,   194,
-     195,   196,   197
+       0,   110,   110,   111,   112,   113,   114,   115,   116,   117,
+     119,   120,   121,   122,   123,   124,   125,   126,   127,   128,
+     130,   132,   133,   134,   136,   137,   139,   140,   141,   142,
+     143,   144,   146,   148,   149,   151,   153,   155,   157,   158,
+     159,   160,   161,   162,   163,   164,   165,   166,   169,   170,
+     171,   172,   174,   175,   176,   178,   179,   180,   181,   182,
+     183,   184,   185,   187,   188,   190,   191,   192,   193,   195,
+     196,   197,   198
 };
 #endif
 
@@ -1265,397 +1266,397 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: program START COL  */
-#line 109 "rime.y"
+#line 110 "rime.y"
                             { set_start(); }
-#line 1271 "rime.tab.c"
+#line 1272 "rime.tab.c"
     break;
 
   case 8: /* program: program END  */
-#line 115 "rime.y"
+#line 116 "rime.y"
                             { YYACCEPT; }
-#line 1277 "rime.tab.c"
+#line 1278 "rime.tab.c"
     break;
 
   case 10: /* ins: op0  */
-#line 118 "rime.y"
+#line 119 "rime.y"
                                 { generate_instruction(INS_OP0, (yyvsp[0].byte), 0, 0, 0);     }
-#line 1283 "rime.tab.c"
+#line 1284 "rime.tab.c"
     break;
 
   case 11: /* ins: jmp LABEL  */
-#line 119 "rime.y"
+#line 120 "rime.y"
                                 { generate_instruction(INS_JMP_LBL, (yyvsp[-1].byte), 0, 0, 0); }
-#line 1289 "rime.tab.c"
+#line 1290 "rime.tab.c"
     break;
 
   case 12: /* ins: jmp ADR  */
-#line 120 "rime.y"
+#line 121 "rime.y"
                                 { generate_instruction(INS_JMP_ADR, (yyvsp[-1].byte), 0, 0, 0); }
-#line 1295 "rime.tab.c"
+#line 1296 "rime.tab.c"
     break;
 
   case 13: /* ins: swr rg1_spec rg2_spec sw  */
-#line 121 "rime.y"
+#line 122 "rime.y"
                                 { generate_instruction(INS_SWR, (yyvsp[-3].byte), (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte));  }
-#line 1301 "rime.tab.c"
+#line 1302 "rime.tab.c"
     break;
 
   case 14: /* ins: flg adr_spec flg_spec  */
-#line 122 "rime.y"
+#line 123 "rime.y"
                                 { generate_instruction(INS_FLG, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1307 "rime.tab.c"
+#line 1308 "rime.tab.c"
     break;
 
   case 15: /* ins: PSH wrk_reg  */
-#line 123 "rime.y"
+#line 124 "rime.y"
                                 { generate_instruction(INS_PSH, (yyvsp[0].byte), 0, 0, 0);     }
-#line 1313 "rime.tab.c"
+#line 1314 "rime.tab.c"
     break;
 
   case 16: /* ins: pop wrk_reg  */
-#line 124 "rime.y"
+#line 125 "rime.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-1].byte), 0, (yyvsp[0].byte), 0);    }
-#line 1319 "rime.tab.c"
+#line 1320 "rime.tab.c"
     break;
 
   case 17: /* ins: adr adr_spec adr_reg  */
-#line 125 "rime.y"
+#line 126 "rime.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1325 "rime.tab.c"
+#line 1326 "rime.tab.c"
     break;
 
   case 18: /* ins: rot wrk_reg  */
-#line 126 "rime.y"
+#line 127 "rime.y"
                                 { generate_instruction(INS_ROT, (yyvsp[-1].byte), (yyvsp[0].byte), 0, 0);    }
-#line 1331 "rime.tab.c"
+#line 1332 "rime.tab.c"
     break;
 
   case 19: /* ins: op2 adr_spec wrk_reg  */
-#line 127 "rime.y"
+#line 128 "rime.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1337 "rime.tab.c"
+#line 1338 "rime.tab.c"
     break;
 
   case 20: /* label: LABEL COL  */
-#line 129 "rime.y"
+#line 130 "rime.y"
                   { if (pass == FIRST) { add_label(); } }
-#line 1343 "rime.tab.c"
+#line 1344 "rime.tab.c"
     break;
 
   case 21: /* func_def: DEF LABEL COL  */
-#line 131 "rime.y"
+#line 132 "rime.y"
                           { add_label();    }
-#line 1349 "rime.tab.c"
+#line 1350 "rime.tab.c"
     break;
 
   case 22: /* func_ret: RET  */
-#line 132 "rime.y"
+#line 133 "rime.y"
                           { func_return();  }
-#line 1355 "rime.tab.c"
+#line 1356 "rime.tab.c"
     break;
 
   case 23: /* func_call: FUN LABEL  */
-#line 133 "rime.y"
+#line 134 "rime.y"
                           { func_call();    }
-#line 1361 "rime.tab.c"
+#line 1362 "rime.tab.c"
     break;
 
   case 24: /* op0: NOP  */
-#line 135 "rime.y"
+#line 136 "rime.y"
           { (yyval.byte) = 0x00; }
-#line 1367 "rime.tab.c"
+#line 1368 "rime.tab.c"
     break;
 
   case 25: /* op0: RST  */
-#line 136 "rime.y"
+#line 137 "rime.y"
           { (yyval.byte) = 0x01; }
-#line 1373 "rime.tab.c"
+#line 1374 "rime.tab.c"
     break;
 
   case 26: /* jmp: JMP  */
-#line 138 "rime.y"
+#line 139 "rime.y"
           { (yyval.byte) = 0x20; }
-#line 1379 "rime.tab.c"
+#line 1380 "rime.tab.c"
     break;
 
   case 27: /* jmp: JNE  */
-#line 139 "rime.y"
+#line 140 "rime.y"
           { (yyval.byte) = 0x21; }
-#line 1385 "rime.tab.c"
+#line 1386 "rime.tab.c"
     break;
 
   case 28: /* jmp: JEQ  */
-#line 140 "rime.y"
+#line 141 "rime.y"
           { (yyval.byte) = 0xA1; }
-#line 1391 "rime.tab.c"
+#line 1392 "rime.tab.c"
     break;
 
   case 29: /* jmp: JLT  */
-#line 141 "rime.y"
+#line 142 "rime.y"
           { (yyval.byte) = 0x22; }
-#line 1397 "rime.tab.c"
+#line 1398 "rime.tab.c"
     break;
 
   case 30: /* jmp: JGE  */
-#line 142 "rime.y"
+#line 143 "rime.y"
           { (yyval.byte) = 0xA2; }
-#line 1403 "rime.tab.c"
+#line 1404 "rime.tab.c"
     break;
 
   case 31: /* jmp: JDC  */
-#line 143 "rime.y"
+#line 144 "rime.y"
           { (yyval.byte) = 0x23; }
-#line 1409 "rime.tab.c"
+#line 1410 "rime.tab.c"
     break;
 
   case 32: /* swr: SWR  */
-#line 145 "rime.y"
+#line 146 "rime.y"
           { (yyval.byte) = 0x04; }
-#line 1415 "rime.tab.c"
+#line 1416 "rime.tab.c"
     break;
 
   case 33: /* sw: SW  */
-#line 147 "rime.y"
+#line 148 "rime.y"
          { (yyval.byte) = 1; }
-#line 1421 "rime.tab.c"
+#line 1422 "rime.tab.c"
     break;
 
   case 34: /* sw: %empty  */
-#line 148 "rime.y"
+#line 149 "rime.y"
          { (yyval.byte) = 0; }
-#line 1427 "rime.tab.c"
+#line 1428 "rime.tab.c"
     break;
 
   case 35: /* flg: FLG  */
-#line 150 "rime.y"
+#line 151 "rime.y"
           { (yyval.byte) = 0x0C; }
-#line 1433 "rime.tab.c"
+#line 1434 "rime.tab.c"
     break;
 
   case 36: /* adr: ADR  */
-#line 152 "rime.y"
+#line 153 "rime.y"
           { (yyval.byte) = 0x08; }
-#line 1439 "rime.tab.c"
+#line 1440 "rime.tab.c"
     break;
 
   case 37: /* pop: POP  */
-#line 154 "rime.y"
+#line 155 "rime.y"
           { (yyval.byte) = 0x15; }
-#line 1445 "rime.tab.c"
+#line 1446 "rime.tab.c"
     break;
 
   case 38: /* op2: PSH  */
-#line 156 "rime.y"
+#line 157 "rime.y"
           { (yyval.byte) = 0x14; }
-#line 1451 "rime.tab.c"
+#line 1452 "rime.tab.c"
     break;
 
   case 39: /* op2: STV  */
-#line 157 "rime.y"
+#line 158 "rime.y"
           { (yyval.byte) = 0x16; }
-#line 1457 "rime.tab.c"
+#line 1458 "rime.tab.c"
     break;
 
   case 40: /* op2: LDV  */
-#line 158 "rime.y"
+#line 159 "rime.y"
           { (yyval.byte) = 0x17; }
-#line 1463 "rime.tab.c"
+#line 1464 "rime.tab.c"
     break;
 
   case 41: /* op2: ADD  */
-#line 159 "rime.y"
+#line 160 "rime.y"
           { (yyval.byte) = 0x18; }
-#line 1469 "rime.tab.c"
+#line 1470 "rime.tab.c"
     break;
 
   case 42: /* op2: ADC  */
-#line 160 "rime.y"
+#line 161 "rime.y"
           { (yyval.byte) = 0x19; }
-#line 1475 "rime.tab.c"
+#line 1476 "rime.tab.c"
     break;
 
   case 43: /* op2: SUB  */
-#line 161 "rime.y"
+#line 162 "rime.y"
           { (yyval.byte) = 0x1A; }
-#line 1481 "rime.tab.c"
+#line 1482 "rime.tab.c"
     break;
 
   case 44: /* op2: SBC  */
-#line 162 "rime.y"
+#line 163 "rime.y"
           { (yyval.byte) = 0x1B; }
-#line 1487 "rime.tab.c"
+#line 1488 "rime.tab.c"
     break;
 
   case 45: /* op2: ORR  */
-#line 163 "rime.y"
+#line 164 "rime.y"
           { (yyval.byte) = 0x1C; }
-#line 1493 "rime.tab.c"
+#line 1494 "rime.tab.c"
     break;
 
   case 46: /* op2: AND  */
-#line 164 "rime.y"
+#line 165 "rime.y"
           { (yyval.byte) = 0x1D; }
-#line 1499 "rime.tab.c"
+#line 1500 "rime.tab.c"
     break;
 
   case 47: /* op2: XOR  */
-#line 165 "rime.y"
+#line 166 "rime.y"
           { (yyval.byte) = 0x1E; }
-#line 1505 "rime.tab.c"
+#line 1506 "rime.tab.c"
     break;
 
   case 48: /* rot: INC  */
-#line 168 "rime.y"
+#line 169 "rime.y"
           { (yyval.byte) = 0x1F | (0 << 6); }
-#line 1511 "rime.tab.c"
+#line 1512 "rime.tab.c"
     break;
 
   case 49: /* rot: DEC  */
-#line 169 "rime.y"
+#line 170 "rime.y"
           { (yyval.byte) = 0x1F | (1 << 6); }
-#line 1517 "rime.tab.c"
+#line 1518 "rime.tab.c"
     break;
 
   case 50: /* rot: LSH  */
-#line 170 "rime.y"
+#line 171 "rime.y"
           { (yyval.byte) = 0x1F | (2 << 6); }
-#line 1523 "rime.tab.c"
+#line 1524 "rime.tab.c"
     break;
 
   case 51: /* rot: RSH  */
-#line 171 "rime.y"
+#line 172 "rime.y"
           { (yyval.byte) = 0x1F | (3 << 6); }
-#line 1529 "rime.tab.c"
+#line 1530 "rime.tab.c"
     break;
 
   case 52: /* flg_spec: AND  */
-#line 173 "rime.y"
+#line 174 "rime.y"
               { (yyval.byte) = 0; }
-#line 1535 "rime.tab.c"
+#line 1536 "rime.tab.c"
     break;
 
   case 53: /* flg_spec: ORR  */
-#line 174 "rime.y"
+#line 175 "rime.y"
               { (yyval.byte) = 1; }
-#line 1541 "rime.tab.c"
+#line 1542 "rime.tab.c"
     break;
 
   case 54: /* flg_spec: XOR  */
-#line 175 "rime.y"
+#line 176 "rime.y"
               { (yyval.byte) = 2; }
-#line 1547 "rime.tab.c"
+#line 1548 "rime.tab.c"
     break;
 
   case 55: /* rg1_spec: CTR  */
-#line 177 "rime.y"
+#line 178 "rime.y"
               { (yyval.byte) = 0; }
-#line 1553 "rime.tab.c"
+#line 1554 "rime.tab.c"
     break;
 
   case 56: /* rg1_spec: FRG  */
-#line 178 "rime.y"
+#line 179 "rime.y"
               { (yyval.byte) = 1; }
-#line 1559 "rime.tab.c"
+#line 1560 "rime.tab.c"
     break;
 
   case 57: /* rg1_spec: SP  */
-#line 179 "rime.y"
+#line 180 "rime.y"
               { (yyval.byte) = 2; }
-#line 1565 "rime.tab.c"
+#line 1566 "rime.tab.c"
     break;
 
   case 58: /* rg1_spec: PC  */
-#line 180 "rime.y"
+#line 181 "rime.y"
               { (yyval.byte) = 3; }
-#line 1571 "rime.tab.c"
+#line 1572 "rime.tab.c"
     break;
 
   case 59: /* rg1_spec: TMR  */
-#line 181 "rime.y"
+#line 182 "rime.y"
               { (yyval.byte) = 4; }
-#line 1577 "rime.tab.c"
+#line 1578 "rime.tab.c"
     break;
 
   case 60: /* rg1_spec: DP  */
-#line 182 "rime.y"
+#line 183 "rime.y"
               { (yyval.byte) = 5; }
-#line 1583 "rime.tab.c"
+#line 1584 "rime.tab.c"
     break;
 
   case 61: /* rg1_spec: AP  */
-#line 183 "rime.y"
+#line 184 "rime.y"
               { (yyval.byte) = 6; }
-#line 1589 "rime.tab.c"
+#line 1590 "rime.tab.c"
     break;
 
   case 62: /* rg1_spec: ADR  */
-#line 184 "rime.y"
+#line 185 "rime.y"
               { (yyval.byte) = 7; }
-#line 1595 "rime.tab.c"
+#line 1596 "rime.tab.c"
     break;
 
   case 63: /* rg2_spec: ACC  */
-#line 186 "rime.y"
+#line 187 "rime.y"
               { (yyval.byte) = 0; }
-#line 1601 "rime.tab.c"
+#line 1602 "rime.tab.c"
     break;
 
   case 64: /* rg2_spec: ADR  */
-#line 187 "rime.y"
+#line 188 "rime.y"
               { (yyval.byte) = 1; }
-#line 1607 "rime.tab.c"
+#line 1608 "rime.tab.c"
     break;
 
   case 65: /* adr_spec: STK  */
-#line 189 "rime.y"
+#line 190 "rime.y"
                   { (yyval.byte) = 0; }
-#line 1613 "rime.tab.c"
+#line 1614 "rime.tab.c"
     break;
 
   case 66: /* adr_spec: IMM LIT  */
-#line 190 "rime.y"
+#line 191 "rime.y"
                   { (yyval.byte) = 1; }
-#line 1619 "rime.tab.c"
+#line 1620 "rime.tab.c"
     break;
 
   case 67: /* adr_spec: IND  */
-#line 191 "rime.y"
+#line 192 "rime.y"
                   { (yyval.byte) = 2; }
-#line 1625 "rime.tab.c"
+#line 1626 "rime.tab.c"
     break;
 
   case 68: /* adr_spec: DIR LIT  */
-#line 192 "rime.y"
+#line 193 "rime.y"
                   { (yyval.byte) = 3; }
-#line 1631 "rime.tab.c"
+#line 1632 "rime.tab.c"
     break;
 
   case 69: /* wrk_reg: ACC  */
-#line 194 "rime.y"
+#line 195 "rime.y"
               { (yyval.byte) = 0; }
-#line 1637 "rime.tab.c"
+#line 1638 "rime.tab.c"
     break;
 
   case 70: /* wrk_reg: CTR  */
-#line 195 "rime.y"
+#line 196 "rime.y"
               { (yyval.byte) = 1; }
-#line 1643 "rime.tab.c"
+#line 1644 "rime.tab.c"
     break;
 
   case 71: /* adr_reg: ADL  */
-#line 196 "rime.y"
+#line 197 "rime.y"
               { (yyval.byte) = 0; }
-#line 1649 "rime.tab.c"
+#line 1650 "rime.tab.c"
     break;
 
   case 72: /* adr_reg: ADH  */
-#line 197 "rime.y"
+#line 198 "rime.y"
               { (yyval.byte) = 1; }
-#line 1655 "rime.tab.c"
+#line 1656 "rime.tab.c"
     break;
 
 
-#line 1659 "rime.tab.c"
+#line 1660 "rime.tab.c"
 
       default: break;
     }
@@ -1848,7 +1849,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 198 "rime.y"
+#line 199 "rime.y"
 
 
 // Parsing rules
@@ -1902,52 +1903,44 @@ void generate_instruction(InstructionType type,
   }
 }
 
-void parse_op0(byte_t opcode) {
+void parse_line(byte_t opcode) {
   if (pass == SECOND) { program[line_num] = (opcode); }
-  line_num++;
+  ++line_num;
+}
+
+void parse_op0(byte_t opcode) {
+  parse_line(opcode);
 }
 
 void parse_jmp(byte_t opcode, int jump_to) {
-  if (pass == SECOND) { program[line_num] = (0x08 | (3 << 5)); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = ((jump_to >> 8)); } // Setting ADH
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x08 | (2 << 5)); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = ((jump_to & 0xFF)); } // Setting ADL
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (opcode); }
-  line_num++;
+  parse_line(0x08 | (3 << 5));
+  parse_line((jump_to >> 8)); // Setting ADH
+  parse_line(0x08 | (2 << 5));
+  parse_line((jump_to & 0xFF)); // Setting ADL
+  parse_line(opcode);
 }
 
 void parse_swr(byte_t opcode, byte_t rg1_spec, byte_t rg2_spec, byte_t sw) {
-  if (pass == SECOND) { program[line_num] = (opcode | (rg1_spec << 5) | (sw << 1) | rg2_spec); }
-  line_num++;
+  parse_line(opcode | (rg1_spec << 5) | (sw << 1) | rg2_spec);
 }
 
 void parse_flg(byte_t opcode, byte_t operand, byte_t flg_spec) {
-  if (pass == SECOND) { program[line_num] = (opcode | (operand << 6) | flg_spec); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (yylval.lit_val); }
-  line_num++;
+  parse_line(opcode | (operand << 6) | flg_spec);
+  parse_line(yylval.lit_val);
 }
 
 void parse_reg_psh(byte_t reg_spec) {
-  if (pass == SECOND) { program[line_num] = (0x16 | (reg_spec << 5)); }
-  line_num++;
+  parse_line(0x16 | (reg_spec << 5));
 }
 
 void parse_rot(byte_t opcode, byte_t reg_spec) {
-  if (pass == SECOND) { program[line_num] = (opcode | (reg_spec << 5)); }
-  line_num++;
+  parse_line(opcode | (reg_spec << 5));
 }
 
 void parse_op2(byte_t opcode, byte_t operand, byte_t reg_spec) {
-  if (pass == SECOND) { program[line_num] = (opcode | (operand << 6) | (reg_spec << 5)); }
-  line_num++;
+  parse_line(opcode | (operand << 6) | (reg_spec << 5));
   if (operand & 1) {
-    if (pass == SECOND) { program[line_num] = (yylval.lit_val); }
-  line_num++;
+    parse_line(yylval.lit_val);
   }
 }
 
@@ -1969,42 +1962,26 @@ int get_label_value() {
 }
 
 void func_call() {
-  if (pass == SECOND) { program[line_num] = (0x16); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x36); } // push registers onto stack
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x64); } // get current address
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x16); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x36); } // push current address on stack (high byte first)
-  line_num++;
+  parse_line(0x16);
+  parse_line(0x36); // push registers onto stack
+  parse_line(0x64); // get current address
+  parse_line(0x16);
+  parse_line(0x36); // push current address on stack (high byte first)
   parse_jmp(0x20, get_label_value()); // jump to label
-  if (pass == SECOND) { program[line_num] = (0x35); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x15); } // restore register state
-  line_num++;
+  parse_line(0x35);
+  parse_line(0x15); // restore register state
 }
 
 void func_return() {
-  if (pass == SECOND) { program[line_num] = (0xE4); } // store result in address register
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x35); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x15); } // pop return address
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x78); }
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (FUNC_CALL_OFFSET); } // add offset to address
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x58); } // to skip function call
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x00); } // propagate carry
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0xE4); } // write return address to address register
-  line_num++;
-  if (pass == SECOND) { program[line_num] = (0x20); } // jump to label
-  line_num++;
+  parse_line(0xE4); // store result in address register
+  parse_line(0x35);
+  parse_line(0x15); // pop return address
+  parse_line(0x78);
+  parse_line(FUNC_CALL_OFFSET); // add offset to address
+  parse_line(0x58); // to skip function call
+  parse_line(0x00); // propagate carry
+  parse_line(0xE4); // write return address to address register
+  parse_line(0x20); // jump to label
 }
 
 void set_start() {
@@ -2023,7 +2000,7 @@ void print_info() {
   fprintf(stderr, "Labels:\n");
 
   for (int i = 0; i < label_count; i++) {
-    fprintf(stderr, "%s at %d\n", labels[i].name, labels[i].value);
+    fprintf(stderr, "%04X: %s\n", labels[i].value, labels[i].name);
   }
 }
 
@@ -2044,7 +2021,7 @@ int main(int argc, char* argv[]) {
   yyparse();
 
   print_info();
-  line_num = 0;
+  line_num = PROGRAM_START_ADDR;
 
   yyrestart(yyin);
   rewind(yyin);
