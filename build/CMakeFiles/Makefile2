@@ -63,7 +63,8 @@ CMAKE_BINARY_DIR = /mnt/c/Users/param/Param/Programming/C++/rime/build
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/processor.dir/all
+all: CMakeFiles/rime.dir/all
+all: CMakeFiles/rc.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -71,34 +72,61 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/processor.dir/clean
+clean: CMakeFiles/rime.dir/clean
+clean: CMakeFiles/rc.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/processor.dir
+# Target rules for target CMakeFiles/rime.dir
 
 # All Build rule for target.
-CMakeFiles/processor.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles --progress-num=1,2,3,4 "Built target processor"
-.PHONY : CMakeFiles/processor.dir/all
+CMakeFiles/rime.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles --progress-num=7,8,9,10 "Built target rime"
+.PHONY : CMakeFiles/rime.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/processor.dir/rule: cmake_check_build_system
+CMakeFiles/rime.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles 4
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/processor.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/rime.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles 0
-.PHONY : CMakeFiles/processor.dir/rule
+.PHONY : CMakeFiles/rime.dir/rule
 
 # Convenience name for target.
-processor: CMakeFiles/processor.dir/rule
-.PHONY : processor
+rime: CMakeFiles/rime.dir/rule
+.PHONY : rime
 
 # clean rule for target.
-CMakeFiles/processor.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/clean
-.PHONY : CMakeFiles/processor.dir/clean
+CMakeFiles/rime.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/clean
+.PHONY : CMakeFiles/rime.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/rc.dir
+
+# All Build rule for target.
+CMakeFiles/rc.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target rc"
+.PHONY : CMakeFiles/rc.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/rc.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/rc.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles 0
+.PHONY : CMakeFiles/rc.dir/rule
+
+# Convenience name for target.
+rc: CMakeFiles/rc.dir/rule
+.PHONY : rc
+
+# clean rule for target.
+CMakeFiles/rc.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/clean
+.PHONY : CMakeFiles/rc.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

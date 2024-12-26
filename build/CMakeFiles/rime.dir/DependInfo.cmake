@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/mnt/c/Users/param/Param/Programming/C++/rime/src/main.cpp" "CMakeFiles/processor.dir/src/main.cpp.o" "gcc" "CMakeFiles/processor.dir/src/main.cpp.o.d"
-  "/mnt/c/Users/param/Param/Programming/C++/rime/src/mem.cpp" "CMakeFiles/processor.dir/src/mem.cpp.o" "gcc" "CMakeFiles/processor.dir/src/mem.cpp.o.d"
-  "/mnt/c/Users/param/Param/Programming/C++/rime/src/processor.cpp" "CMakeFiles/processor.dir/src/processor.cpp.o" "gcc" "CMakeFiles/processor.dir/src/processor.cpp.o.d"
+  "/mnt/c/Users/param/Param/Programming/C++/rime/src/main.cpp" "CMakeFiles/rime.dir/src/main.cpp.o" "gcc" "CMakeFiles/rime.dir/src/main.cpp.o.d"
+  "/mnt/c/Users/param/Param/Programming/C++/rime/src/mem.cpp" "CMakeFiles/rime.dir/src/mem.cpp.o" "gcc" "CMakeFiles/rime.dir/src/mem.cpp.o.d"
+  "/mnt/c/Users/param/Param/Programming/C++/rime/src/processor.cpp" "CMakeFiles/rime.dir/src/processor.cpp.o" "gcc" "CMakeFiles/rime.dir/src/processor.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

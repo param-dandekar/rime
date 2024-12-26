@@ -35,8 +35,8 @@
    especially those whose name start with YY_ or yy_.  They are
    private implementation details that can be changed or removed.  */
 
-#ifndef YY_YY_INCLUDE_RIME_PARSER_H_INCLUDED
-# define YY_YY_INCLUDE_RIME_PARSER_H_INCLUDED
+#ifndef YY_YY_MNT_C_USERS_PARAM_PARAM_PROGRAMMING_C_RIME_BUILD_PARSER_H_INCLUDED
+# define YY_YY_MNT_C_USERS_PARAM_PARAM_PROGRAMMING_C_RIME_BUILD_PARSER_H_INCLUDED
 /* Debug traces.  */
 #ifndef YYDEBUG
 # define YYDEBUG 0
@@ -113,13 +113,13 @@ extern int yydebug;
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 union YYSTYPE
 {
-#line 79 "src/rime/parser.y"
+#line 73 "src/rime/parser.y"
 
   unsigned char byte;
   unsigned char lit_val;
   char *label;
 
-#line 123 "include/rime/parser.h"
+#line 123 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
@@ -134,4 +134,4 @@ extern YYSTYPE yylval;
 int yyparse (void);
 
 
-#endif /* !YY_YY_INCLUDE_RIME_PARSER_H_INCLUDED  */
+#endif /* !YY_YY_MNT_C_USERS_PARAM_PARAM_PROGRAMMING_C_RIME_BUILD_PARSER_H_INCLUDED  */

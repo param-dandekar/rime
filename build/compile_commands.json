@@ -1,20 +1,38 @@
 [
 {
   "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
-  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -ggdb -O0 -std=gnu++17 -o CMakeFiles/processor.dir/src/main.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/main.cpp",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -std=gnu++17 -o CMakeFiles/rime.dir/src/main.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/main.cpp",
   "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/main.cpp",
-  "output": "CMakeFiles/processor.dir/src/main.cpp.o"
+  "output": "CMakeFiles/rime.dir/src/main.cpp.o"
 },
 {
   "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
-  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -ggdb -O0 -std=gnu++17 -o CMakeFiles/processor.dir/src/mem.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/mem.cpp",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -std=gnu++17 -o CMakeFiles/rime.dir/src/mem.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/mem.cpp",
   "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/mem.cpp",
-  "output": "CMakeFiles/processor.dir/src/mem.cpp.o"
+  "output": "CMakeFiles/rime.dir/src/mem.cpp.o"
 },
 {
   "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
-  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -ggdb -O0 -std=gnu++17 -o CMakeFiles/processor.dir/src/processor.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/processor.cpp",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -std=gnu++17 -o CMakeFiles/rime.dir/src/processor.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/processor.cpp",
   "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/processor.cpp",
-  "output": "CMakeFiles/processor.dir/src/processor.cpp.o"
+  "output": "CMakeFiles/rime.dir/src/processor.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
+  "command": "/usr/bin/cc  -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -o CMakeFiles/rc.dir/parser.c.o -c /mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c",
+  "file": "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c",
+  "output": "CMakeFiles/rc.dir/parser.c.o"
+},
+{
+  "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
+  "command": "/usr/bin/cc  -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -o CMakeFiles/rc.dir/lexer.yy.c.o -c /mnt/c/Users/param/Param/Programming/C++/rime/build/lexer.yy.c",
+  "file": "/mnt/c/Users/param/Param/Programming/C++/rime/build/lexer.yy.c",
+  "output": "CMakeFiles/rc.dir/lexer.yy.c.o"
+},
+{
+  "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -std=gnu++17 -o CMakeFiles/rc.dir/src/rime/main.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/rime/main.cpp",
+  "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/rime/main.cpp",
+  "output": "CMakeFiles/rc.dir/src/rime/main.cpp.o"
 }
 ]

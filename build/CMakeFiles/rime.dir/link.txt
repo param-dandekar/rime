@@ -1,0 +1,1 @@
+/usr/bin/c++ -ggdb -O0 CMakeFiles/rime.dir/src/main.cpp.o CMakeFiles/rime.dir/src/mem.cpp.o CMakeFiles/rime.dir/src/processor.cpp.o -o rime 

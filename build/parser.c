@@ -77,10 +77,10 @@
 
 #define MAX_LABEL_LEN 32
 #define MAX_LABELS 256
-#define PROGRAM_SIZE 65536
 
-#define PROGRAM_START_ADDR 0x02
-#define FUNC_CALL_OFFSET 0x07
+int yyerror(const char *s);
+int yylex(void);
+void yyrestart(FILE*);
 
 typedef enum CompilerPass_e {
   FIRST,
@@ -102,8 +102,6 @@ typedef enum InstructionType_e {
   INS_OP2,
 } InstructionType;
 
-typedef unsigned char byte_t;
-
 byte_t program[PROGRAM_SIZE] = {0};
 
 unsigned int line_num = PROGRAM_START_ADDR;
@@ -115,10 +113,6 @@ typedef struct label_t {
 
 label labels[MAX_LABELS];
 int label_count = 1; // labels[0] is reserved for START
-
-int yyerror(const char *s);
-int yylex(void);
-void yyrestart(FILE*);
 
 void generate_instruction(InstructionType type,
                           byte_t arg1,
@@ -144,7 +138,8 @@ void func_return();
 void set_start();
 void set_end();
 
-#line 148 "src/rime/parser.c"
+
+#line 143 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -638,14 +633,14 @@ static const yytype_int8 yytranslate[] =
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,   110,   110,   111,   112,   113,   114,   115,   116,   117,
-     119,   120,   121,   122,   123,   124,   125,   126,   127,   128,
-     130,   132,   133,   134,   136,   137,   139,   140,   141,   142,
-     143,   144,   146,   148,   149,   151,   153,   155,   157,   158,
-     159,   160,   161,   162,   163,   164,   165,   166,   169,   170,
-     171,   172,   174,   175,   176,   178,   179,   180,   181,   182,
-     183,   184,   185,   187,   188,   190,   191,   192,   193,   195,
-     196,   197,   198
+       0,   105,   105,   106,   107,   108,   109,   110,   111,   112,
+     114,   115,   116,   117,   118,   119,   120,   121,   122,   123,
+     125,   127,   128,   129,   131,   132,   134,   135,   136,   137,
+     138,   139,   141,   143,   144,   146,   148,   150,   152,   153,
+     154,   155,   156,   157,   158,   159,   160,   161,   164,   165,
+     166,   167,   169,   170,   171,   173,   174,   175,   176,   177,
+     178,   179,   180,   182,   183,   185,   186,   187,   188,   190,
+     191,   192,   193
 };
 #endif
 
@@ -1266,397 +1261,397 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: program START COL  */
-#line 110 "src/rime/parser.y"
+#line 105 "src/rime/parser.y"
                             { set_start(); }
-#line 1272 "src/rime/parser.c"
+#line 1267 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 8: /* program: program END  */
-#line 116 "src/rime/parser.y"
+#line 111 "src/rime/parser.y"
                             { YYACCEPT; }
-#line 1278 "src/rime/parser.c"
+#line 1273 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 10: /* ins: op0  */
-#line 119 "src/rime/parser.y"
+#line 114 "src/rime/parser.y"
                                 { generate_instruction(INS_OP0, (yyvsp[0].byte), 0, 0, 0);     }
-#line 1284 "src/rime/parser.c"
+#line 1279 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 11: /* ins: jmp LABEL  */
-#line 120 "src/rime/parser.y"
+#line 115 "src/rime/parser.y"
                                 { generate_instruction(INS_JMP_LBL, (yyvsp[-1].byte), 0, 0, 0); }
-#line 1290 "src/rime/parser.c"
+#line 1285 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 12: /* ins: jmp ADR  */
-#line 121 "src/rime/parser.y"
+#line 116 "src/rime/parser.y"
                                 { generate_instruction(INS_JMP_ADR, (yyvsp[-1].byte), 0, 0, 0); }
-#line 1296 "src/rime/parser.c"
+#line 1291 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 13: /* ins: swr rg1_spec rg2_spec sw  */
-#line 122 "src/rime/parser.y"
+#line 117 "src/rime/parser.y"
                                 { generate_instruction(INS_SWR, (yyvsp[-3].byte), (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte));  }
-#line 1302 "src/rime/parser.c"
+#line 1297 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 14: /* ins: flg adr_spec flg_spec  */
-#line 123 "src/rime/parser.y"
+#line 118 "src/rime/parser.y"
                                 { generate_instruction(INS_FLG, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1308 "src/rime/parser.c"
+#line 1303 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 15: /* ins: PSH wrk_reg  */
-#line 124 "src/rime/parser.y"
+#line 119 "src/rime/parser.y"
                                 { generate_instruction(INS_PSH, (yyvsp[0].byte), 0, 0, 0);     }
-#line 1314 "src/rime/parser.c"
+#line 1309 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 16: /* ins: pop wrk_reg  */
-#line 125 "src/rime/parser.y"
+#line 120 "src/rime/parser.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-1].byte), 0, (yyvsp[0].byte), 0);    }
-#line 1320 "src/rime/parser.c"
+#line 1315 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 17: /* ins: adr adr_spec adr_reg  */
-#line 126 "src/rime/parser.y"
+#line 121 "src/rime/parser.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1326 "src/rime/parser.c"
+#line 1321 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 18: /* ins: rot wrk_reg  */
-#line 127 "src/rime/parser.y"
+#line 122 "src/rime/parser.y"
                                 { generate_instruction(INS_ROT, (yyvsp[-1].byte), (yyvsp[0].byte), 0, 0);    }
-#line 1332 "src/rime/parser.c"
+#line 1327 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 19: /* ins: op2 adr_spec wrk_reg  */
-#line 128 "src/rime/parser.y"
+#line 123 "src/rime/parser.y"
                                 { generate_instruction(INS_OP2, (yyvsp[-2].byte), (yyvsp[-1].byte), (yyvsp[0].byte), 0);   }
-#line 1338 "src/rime/parser.c"
+#line 1333 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 20: /* label: LABEL COL  */
-#line 130 "src/rime/parser.y"
+#line 125 "src/rime/parser.y"
                   { if (pass == FIRST) { add_label(); } }
-#line 1344 "src/rime/parser.c"
+#line 1339 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 21: /* func_def: DEF LABEL COL  */
-#line 132 "src/rime/parser.y"
+#line 127 "src/rime/parser.y"
                           { add_label();    }
-#line 1350 "src/rime/parser.c"
+#line 1345 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 22: /* func_ret: RET  */
-#line 133 "src/rime/parser.y"
+#line 128 "src/rime/parser.y"
                           { func_return();  }
-#line 1356 "src/rime/parser.c"
+#line 1351 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 23: /* func_call: FUN LABEL  */
-#line 134 "src/rime/parser.y"
+#line 129 "src/rime/parser.y"
                           { func_call();    }
-#line 1362 "src/rime/parser.c"
+#line 1357 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 24: /* op0: NOP  */
-#line 136 "src/rime/parser.y"
+#line 131 "src/rime/parser.y"
           { (yyval.byte) = 0x00; }
-#line 1368 "src/rime/parser.c"
+#line 1363 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 25: /* op0: RST  */
-#line 137 "src/rime/parser.y"
+#line 132 "src/rime/parser.y"
           { (yyval.byte) = 0x01; }
-#line 1374 "src/rime/parser.c"
+#line 1369 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 26: /* jmp: JMP  */
-#line 139 "src/rime/parser.y"
+#line 134 "src/rime/parser.y"
           { (yyval.byte) = 0x20; }
-#line 1380 "src/rime/parser.c"
+#line 1375 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 27: /* jmp: JNE  */
-#line 140 "src/rime/parser.y"
+#line 135 "src/rime/parser.y"
           { (yyval.byte) = 0x21; }
-#line 1386 "src/rime/parser.c"
+#line 1381 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 28: /* jmp: JEQ  */
-#line 141 "src/rime/parser.y"
+#line 136 "src/rime/parser.y"
           { (yyval.byte) = 0xA1; }
-#line 1392 "src/rime/parser.c"
+#line 1387 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 29: /* jmp: JLT  */
-#line 142 "src/rime/parser.y"
+#line 137 "src/rime/parser.y"
           { (yyval.byte) = 0x22; }
-#line 1398 "src/rime/parser.c"
+#line 1393 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 30: /* jmp: JGE  */
-#line 143 "src/rime/parser.y"
+#line 138 "src/rime/parser.y"
           { (yyval.byte) = 0xA2; }
-#line 1404 "src/rime/parser.c"
+#line 1399 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 31: /* jmp: JDC  */
-#line 144 "src/rime/parser.y"
+#line 139 "src/rime/parser.y"
           { (yyval.byte) = 0x23; }
-#line 1410 "src/rime/parser.c"
+#line 1405 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 32: /* swr: SWR  */
-#line 146 "src/rime/parser.y"
+#line 141 "src/rime/parser.y"
           { (yyval.byte) = 0x04; }
-#line 1416 "src/rime/parser.c"
+#line 1411 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 33: /* sw: SW  */
-#line 148 "src/rime/parser.y"
+#line 143 "src/rime/parser.y"
          { (yyval.byte) = 1; }
-#line 1422 "src/rime/parser.c"
+#line 1417 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 34: /* sw: %empty  */
-#line 149 "src/rime/parser.y"
+#line 144 "src/rime/parser.y"
          { (yyval.byte) = 0; }
-#line 1428 "src/rime/parser.c"
+#line 1423 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 35: /* flg: FLG  */
-#line 151 "src/rime/parser.y"
+#line 146 "src/rime/parser.y"
           { (yyval.byte) = 0x0C; }
-#line 1434 "src/rime/parser.c"
+#line 1429 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 36: /* adr: ADR  */
-#line 153 "src/rime/parser.y"
+#line 148 "src/rime/parser.y"
           { (yyval.byte) = 0x08; }
-#line 1440 "src/rime/parser.c"
+#line 1435 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 37: /* pop: POP  */
-#line 155 "src/rime/parser.y"
+#line 150 "src/rime/parser.y"
           { (yyval.byte) = 0x15; }
-#line 1446 "src/rime/parser.c"
+#line 1441 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 38: /* op2: PSH  */
-#line 157 "src/rime/parser.y"
+#line 152 "src/rime/parser.y"
           { (yyval.byte) = 0x14; }
-#line 1452 "src/rime/parser.c"
+#line 1447 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 39: /* op2: STV  */
-#line 158 "src/rime/parser.y"
+#line 153 "src/rime/parser.y"
           { (yyval.byte) = 0x16; }
-#line 1458 "src/rime/parser.c"
+#line 1453 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 40: /* op2: LDV  */
-#line 159 "src/rime/parser.y"
+#line 154 "src/rime/parser.y"
           { (yyval.byte) = 0x17; }
-#line 1464 "src/rime/parser.c"
+#line 1459 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 41: /* op2: ADD  */
-#line 160 "src/rime/parser.y"
+#line 155 "src/rime/parser.y"
           { (yyval.byte) = 0x18; }
-#line 1470 "src/rime/parser.c"
+#line 1465 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 42: /* op2: ADC  */
-#line 161 "src/rime/parser.y"
+#line 156 "src/rime/parser.y"
           { (yyval.byte) = 0x19; }
-#line 1476 "src/rime/parser.c"
+#line 1471 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 43: /* op2: SUB  */
-#line 162 "src/rime/parser.y"
+#line 157 "src/rime/parser.y"
           { (yyval.byte) = 0x1A; }
-#line 1482 "src/rime/parser.c"
+#line 1477 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 44: /* op2: SBC  */
-#line 163 "src/rime/parser.y"
+#line 158 "src/rime/parser.y"
           { (yyval.byte) = 0x1B; }
-#line 1488 "src/rime/parser.c"
+#line 1483 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 45: /* op2: ORR  */
-#line 164 "src/rime/parser.y"
+#line 159 "src/rime/parser.y"
           { (yyval.byte) = 0x1C; }
-#line 1494 "src/rime/parser.c"
+#line 1489 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 46: /* op2: AND  */
-#line 165 "src/rime/parser.y"
+#line 160 "src/rime/parser.y"
           { (yyval.byte) = 0x1D; }
-#line 1500 "src/rime/parser.c"
+#line 1495 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 47: /* op2: XOR  */
-#line 166 "src/rime/parser.y"
+#line 161 "src/rime/parser.y"
           { (yyval.byte) = 0x1E; }
-#line 1506 "src/rime/parser.c"
+#line 1501 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 48: /* rot: INC  */
-#line 169 "src/rime/parser.y"
+#line 164 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (0 << 6); }
-#line 1512 "src/rime/parser.c"
+#line 1507 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 49: /* rot: DEC  */
-#line 170 "src/rime/parser.y"
+#line 165 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (1 << 6); }
-#line 1518 "src/rime/parser.c"
+#line 1513 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 50: /* rot: LSH  */
-#line 171 "src/rime/parser.y"
+#line 166 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (2 << 6); }
-#line 1524 "src/rime/parser.c"
+#line 1519 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 51: /* rot: RSH  */
-#line 172 "src/rime/parser.y"
+#line 167 "src/rime/parser.y"
           { (yyval.byte) = 0x1F | (3 << 6); }
-#line 1530 "src/rime/parser.c"
+#line 1525 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 52: /* flg_spec: AND  */
-#line 174 "src/rime/parser.y"
+#line 169 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1536 "src/rime/parser.c"
+#line 1531 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 53: /* flg_spec: ORR  */
-#line 175 "src/rime/parser.y"
+#line 170 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1542 "src/rime/parser.c"
+#line 1537 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 54: /* flg_spec: XOR  */
-#line 176 "src/rime/parser.y"
+#line 171 "src/rime/parser.y"
               { (yyval.byte) = 2; }
-#line 1548 "src/rime/parser.c"
+#line 1543 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 55: /* rg1_spec: CTR  */
-#line 178 "src/rime/parser.y"
+#line 173 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1554 "src/rime/parser.c"
+#line 1549 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 56: /* rg1_spec: FRG  */
-#line 179 "src/rime/parser.y"
+#line 174 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1560 "src/rime/parser.c"
+#line 1555 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 57: /* rg1_spec: SP  */
-#line 180 "src/rime/parser.y"
+#line 175 "src/rime/parser.y"
               { (yyval.byte) = 2; }
-#line 1566 "src/rime/parser.c"
+#line 1561 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 58: /* rg1_spec: PC  */
-#line 181 "src/rime/parser.y"
+#line 176 "src/rime/parser.y"
               { (yyval.byte) = 3; }
-#line 1572 "src/rime/parser.c"
+#line 1567 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 59: /* rg1_spec: TMR  */
-#line 182 "src/rime/parser.y"
+#line 177 "src/rime/parser.y"
               { (yyval.byte) = 4; }
-#line 1578 "src/rime/parser.c"
+#line 1573 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 60: /* rg1_spec: DP  */
-#line 183 "src/rime/parser.y"
+#line 178 "src/rime/parser.y"
               { (yyval.byte) = 5; }
-#line 1584 "src/rime/parser.c"
+#line 1579 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 61: /* rg1_spec: AP  */
-#line 184 "src/rime/parser.y"
+#line 179 "src/rime/parser.y"
               { (yyval.byte) = 6; }
-#line 1590 "src/rime/parser.c"
+#line 1585 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 62: /* rg1_spec: ADR  */
-#line 185 "src/rime/parser.y"
+#line 180 "src/rime/parser.y"
               { (yyval.byte) = 7; }
-#line 1596 "src/rime/parser.c"
+#line 1591 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 63: /* rg2_spec: ACC  */
-#line 187 "src/rime/parser.y"
+#line 182 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1602 "src/rime/parser.c"
+#line 1597 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 64: /* rg2_spec: ADR  */
-#line 188 "src/rime/parser.y"
+#line 183 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1608 "src/rime/parser.c"
+#line 1603 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 65: /* adr_spec: STK  */
-#line 190 "src/rime/parser.y"
+#line 185 "src/rime/parser.y"
                   { (yyval.byte) = 0; }
-#line 1614 "src/rime/parser.c"
+#line 1609 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 66: /* adr_spec: IMM LIT  */
-#line 191 "src/rime/parser.y"
+#line 186 "src/rime/parser.y"
                   { (yyval.byte) = 1; }
-#line 1620 "src/rime/parser.c"
+#line 1615 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 67: /* adr_spec: IND  */
-#line 192 "src/rime/parser.y"
+#line 187 "src/rime/parser.y"
                   { (yyval.byte) = 2; }
-#line 1626 "src/rime/parser.c"
+#line 1621 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 68: /* adr_spec: DIR LIT  */
-#line 193 "src/rime/parser.y"
+#line 188 "src/rime/parser.y"
                   { (yyval.byte) = 3; }
-#line 1632 "src/rime/parser.c"
+#line 1627 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 69: /* wrk_reg: ACC  */
-#line 195 "src/rime/parser.y"
+#line 190 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1638 "src/rime/parser.c"
+#line 1633 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 70: /* wrk_reg: CTR  */
-#line 196 "src/rime/parser.y"
+#line 191 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1644 "src/rime/parser.c"
+#line 1639 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 71: /* adr_reg: ADL  */
-#line 197 "src/rime/parser.y"
+#line 192 "src/rime/parser.y"
               { (yyval.byte) = 0; }
-#line 1650 "src/rime/parser.c"
+#line 1645 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
   case 72: /* adr_reg: ADH  */
-#line 198 "src/rime/parser.y"
+#line 193 "src/rime/parser.y"
               { (yyval.byte) = 1; }
-#line 1656 "src/rime/parser.c"
+#line 1651 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
     break;
 
 
-#line 1660 "src/rime/parser.c"
+#line 1655 "/mnt/c/Users/param/Param/Programming/C++/rime/build/parser.c"
 
       default: break;
     }
@@ -1849,7 +1844,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 199 "src/rime/parser.y"
+#line 194 "src/rime/parser.y"
 
 
 // Parsing rules
@@ -1987,6 +1982,9 @@ void func_return() {
 void set_start() {
   strncpy(labels[0].name, "_START", MAX_LABEL_LEN);
   labels[0].value = line_num;
+  for (int i = 0; i < PROGRAM_START_ADDR; i++) {
+    program[i] = (labels[0].value << (i*8)) & 0xFF;
+  }
 }
 
 // Error handling
@@ -2004,14 +2002,9 @@ void print_info() {
   }
 }
 
-int main(int argc, char* argv[]) {
-  if (argc < 2) {
-      printf("Usage: %s <source-file>\n", argv[0]);
-      return 1;
-  }
-
+int run_assembler(char *filename) {
   // Open the source file
-  yyin = fopen(argv[1], "r");
+  yyin = fopen(filename, "r");
   if (!yyin) {
       perror("Failed to open file");
       return 1;
@@ -2029,12 +2022,11 @@ int main(int argc, char* argv[]) {
   pass = SECOND;
   yyparse();
 
+  /*
   int start = labels[0].value % PROGRAM_SIZE;
   printf("%c%c", (start>>8)&0xFF, start&0xFF);
-  for (unsigned int i = 2; i < PROGRAM_SIZE; i++) {
-    printf("%c", program[i]);
-  }
-  
+  */
+
   fclose(yyin);
 
   return 0;

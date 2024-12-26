@@ -117,24 +117,85 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named processor
+# Target rules for targets named rime
 
 # Build rule for target.
-processor: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 processor
-.PHONY : processor
+rime: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rime
+.PHONY : rime
 
 # fast build rule for target.
-processor/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/build
-.PHONY : processor/fast
+rime/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/build
+.PHONY : rime/fast
+
+#=============================================================================
+# Target rules for targets named rc
+
+# Build rule for target.
+rc: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rc
+.PHONY : rc
+
+# fast build rule for target.
+rc/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/build
+.PHONY : rc/fast
+
+lexer.yy.o: lexer.yy.c.o
+.PHONY : lexer.yy.o
+
+# target to build an object file
+lexer.yy.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/lexer.yy.c.o
+.PHONY : lexer.yy.c.o
+
+lexer.yy.i: lexer.yy.c.i
+.PHONY : lexer.yy.i
+
+# target to preprocess a source file
+lexer.yy.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/lexer.yy.c.i
+.PHONY : lexer.yy.c.i
+
+lexer.yy.s: lexer.yy.c.s
+.PHONY : lexer.yy.s
+
+# target to generate assembly for a file
+lexer.yy.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/lexer.yy.c.s
+.PHONY : lexer.yy.c.s
+
+parser.o: parser.c.o
+.PHONY : parser.o
+
+# target to build an object file
+parser.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/parser.c.o
+.PHONY : parser.c.o
+
+parser.i: parser.c.i
+.PHONY : parser.i
+
+# target to preprocess a source file
+parser.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/parser.c.i
+.PHONY : parser.c.i
+
+parser.s: parser.c.s
+.PHONY : parser.s
+
+# target to generate assembly for a file
+parser.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/parser.c.s
+.PHONY : parser.c.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -142,7 +203,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -150,7 +211,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 src/mem.o: src/mem.cpp.o
@@ -158,7 +219,7 @@ src/mem.o: src/mem.cpp.o
 
 # target to build an object file
 src/mem.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/mem.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/mem.cpp.o
 .PHONY : src/mem.cpp.o
 
 src/mem.i: src/mem.cpp.i
@@ -166,7 +227,7 @@ src/mem.i: src/mem.cpp.i
 
 # target to preprocess a source file
 src/mem.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/mem.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/mem.cpp.i
 .PHONY : src/mem.cpp.i
 
 src/mem.s: src/mem.cpp.s
@@ -174,7 +235,7 @@ src/mem.s: src/mem.cpp.s
 
 # target to generate assembly for a file
 src/mem.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/mem.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/mem.cpp.s
 .PHONY : src/mem.cpp.s
 
 src/processor.o: src/processor.cpp.o
@@ -182,7 +243,7 @@ src/processor.o: src/processor.cpp.o
 
 # target to build an object file
 src/processor.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/processor.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/processor.cpp.o
 .PHONY : src/processor.cpp.o
 
 src/processor.i: src/processor.cpp.i
@@ -190,7 +251,7 @@ src/processor.i: src/processor.cpp.i
 
 # target to preprocess a source file
 src/processor.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/processor.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/processor.cpp.i
 .PHONY : src/processor.cpp.i
 
 src/processor.s: src/processor.cpp.s
@@ -198,8 +259,32 @@ src/processor.s: src/processor.cpp.s
 
 # target to generate assembly for a file
 src/processor.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/processor.dir/build.make CMakeFiles/processor.dir/src/processor.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/processor.cpp.s
 .PHONY : src/processor.cpp.s
+
+src/rime/main.o: src/rime/main.cpp.o
+.PHONY : src/rime/main.o
+
+# target to build an object file
+src/rime/main.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/src/rime/main.cpp.o
+.PHONY : src/rime/main.cpp.o
+
+src/rime/main.i: src/rime/main.cpp.i
+.PHONY : src/rime/main.i
+
+# target to preprocess a source file
+src/rime/main.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/src/rime/main.cpp.i
+.PHONY : src/rime/main.cpp.i
+
+src/rime/main.s: src/rime/main.cpp.s
+.PHONY : src/rime/main.s
+
+# target to generate assembly for a file
+src/rime/main.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/src/rime/main.cpp.s
+.PHONY : src/rime/main.cpp.s
 
 # Help Target
 help:
@@ -209,7 +294,14 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... processor"
+	@echo "... rc"
+	@echo "... rime"
+	@echo "... lexer.yy.o"
+	@echo "... lexer.yy.i"
+	@echo "... lexer.yy.s"
+	@echo "... parser.o"
+	@echo "... parser.i"
+	@echo "... parser.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
@@ -219,6 +311,9 @@ help:
 	@echo "... src/processor.o"
 	@echo "... src/processor.i"
 	@echo "... src/processor.s"
+	@echo "... src/rime/main.o"
+	@echo "... src/rime/main.i"
+	@echo "... src/rime/main.s"
 .PHONY : help
 
 

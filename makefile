@@ -11,24 +11,22 @@ ASSM_EXEC=rc
 
 default: all
 
-all: build
+all: processor assembler
 
-.PHONY: build clean-all clean-build clean-assembler debug reconfig assembler
+.PHONY: build clean clean-processor clean-assembler debug reconfig
 
-build:
-	make -C ./build VERBOSE=1
+processor:
+	cd ./build && cmake --build . --target rime VERBOSE=1
 
 assembler:
-	bison --output=${PARSER_OUT} --defines=${ASSM_INC_DIR}/${PARSER}.h ${ASSM_SRC_DIR}/${PARSER}.y
-	flex --outfile=${LEXER_OUT} ${ASSM_SRC_DIR}/${LEXER}.l ${ASSM_INC_DIR}/${PARSER}.h
-	gcc -o ${ASSM_EXEC} -I ${ASSM_INC_DIR} ${PARSER_OUT} ${LEXER_OUT} -lfl
+	cd ./build && cmake --build . --target rc VERBOSE=1
 
-clean-all: clean-build clean-assembler
+clean: clean-processor clean-assembler
 
 clean-assembler:
 	rm -f ${ASSM_EXEC} ${PARSER_OUT} ${LEXER_OUT}
 
-clean-build:
+clean-processor:
 	make -C ./build clean
 
 debug:

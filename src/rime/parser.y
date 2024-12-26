@@ -7,10 +7,10 @@
 
 #define MAX_LABEL_LEN 32
 #define MAX_LABELS 256
-#define PROGRAM_SIZE 65536
 
-#define PROGRAM_START_ADDR 0x02
-#define FUNC_CALL_OFFSET 0x07
+int yyerror(const char *s);
+int yylex(void);
+void yyrestart(FILE*);
 
 typedef enum CompilerPass_e {
   FIRST,
@@ -32,8 +32,6 @@ typedef enum InstructionType_e {
   INS_OP2,
 } InstructionType;
 
-typedef unsigned char byte_t;
-
 byte_t program[PROGRAM_SIZE] = {0};
 
 unsigned int line_num = PROGRAM_START_ADDR;
@@ -45,10 +43,6 @@ typedef struct label_t {
 
 label labels[MAX_LABELS];
 int label_count = 1; // labels[0] is reserved for START
-
-int yyerror(const char *s);
-int yylex(void);
-void yyrestart(FILE*);
 
 void generate_instruction(InstructionType type,
                           byte_t arg1,
@@ -73,6 +67,7 @@ void func_return();
 
 void set_start();
 void set_end();
+
 %}
 
 %union {
@@ -333,6 +328,9 @@ void func_return() {
 void set_start() {
   strncpy(labels[0].name, "_START", MAX_LABEL_LEN);
   labels[0].value = line_num;
+  for (int i = 0; i < PROGRAM_START_ADDR; i++) {
+    program[i] = (labels[0].value << (i*8)) & 0xFF;
+  }
 }
 
 // Error handling
@@ -350,14 +348,9 @@ void print_info() {
   }
 }
 
-int main(int argc, char* argv[]) {
-  if (argc < 2) {
-      printf("Usage: %s <source-file>\n", argv[0]);
-      return 1;
-  }
-
+int run_assembler(char *filename) {
   // Open the source file
-  yyin = fopen(argv[1], "r");
+  yyin = fopen(filename, "r");
   if (!yyin) {
       perror("Failed to open file");
       return 1;
@@ -375,12 +368,11 @@ int main(int argc, char* argv[]) {
   pass = SECOND;
   yyparse();
 
+  /*
   int start = labels[0].value % PROGRAM_SIZE;
   printf("%c%c", (start>>8)&0xFF, start&0xFF);
-  for (unsigned int i = 2; i < PROGRAM_SIZE; i++) {
-    printf("%c", program[i]);
-  }
-  
+  */
+
   fclose(yyin);
 
   return 0;
