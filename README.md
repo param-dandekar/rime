@@ -1,4 +1,8 @@
-# Architecture
+# RIME --- RISC Microprocessor Emulator
+
+RIME is an emulator for an 8-bit microprocessor.
+
+# Processor Architecture
 
 ## Registers
 
