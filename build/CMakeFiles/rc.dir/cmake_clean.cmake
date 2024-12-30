@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/rc.dir/lexer.yy.c.o.d"
   "CMakeFiles/rc.dir/parser.c.o"
   "CMakeFiles/rc.dir/parser.c.o.d"
+  "CMakeFiles/rc.dir/src/rime/assembler.cpp.o"
+  "CMakeFiles/rc.dir/src/rime/assembler.cpp.o.d"
   "CMakeFiles/rc.dir/src/rime/main.cpp.o"
   "CMakeFiles/rc.dir/src/rime/main.cpp.o.d"
   "lexer.yy.c"

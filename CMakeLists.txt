@@ -52,7 +52,7 @@ set(PARSER_HEADER ${CMAKE_BINARY_DIR}/${PARSER}.h)
 set(LEXER_SRC ${ASSM_SRC_DIR}/${LEXER}.l)
 set(LEXER_OUT ${CMAKE_BINARY_DIR}/${LEXER}.yy.c)
 
-set(ASSEMBLER_MAIN ${ASSM_SRC_DIR}/main.cpp)
+set(ASSEMBLER_SOURCES "${ASSM_SRC_DIR}/assembler.cpp" "${ASSM_SRC_DIR}/main.cpp")
 
 # Enable Bison and Flex
 find_package(BISON REQUIRED)
@@ -71,7 +71,7 @@ ADD_FLEX_BISON_DEPENDENCY(${LEXER} ${PARSER})
 include_directories(${ASSM_INC_DIR} ${CMAKE_BINARY_DIR})
 
 # Executable
-add_executable(rc ${PARSER_OUT} ${LEXER_OUT} ${ASSEMBLER_MAIN})
+add_executable(rc ${PARSER_OUT} ${LEXER_OUT} ${ASSEMBLER_SOURCES})
 
 # Link libraries
 target_link_libraries(rc fl)

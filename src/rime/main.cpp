@@ -1,12 +1,8 @@
 #include <cstdio>
-#include <fstream>
 #include <iostream>
-#include <string.h>
 #include <string>
 
 #include "rime.h"
-
-extern byte_t program[];
 
 void print_help() {
   std::cout << "Usage: rc [options] <input_file>\n";
@@ -105,13 +101,8 @@ int main(int argc, char *argv[]) {
   }
 
   int res;
-  char filename[MAX_FILENAME];
-  strncpy(filename, input_file.c_str(), MAX_FILENAME);
 
-  res = run_assembler(filename);
-  std::ofstream output_file_stream;
-  for (int i = 0; i < PROGRAM_SIZE; i++) {
-    output_file_stream << program[i];
-  }
-  output_file_stream.close();
+  res = assemble(input_file, output_file);
+
+  return res;
 }

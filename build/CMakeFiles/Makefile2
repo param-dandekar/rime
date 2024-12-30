@@ -83,7 +83,7 @@ clean: CMakeFiles/rc.dir/clean
 CMakeFiles/rime.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles --progress-num=7,8,9,10 "Built target rime"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles --progress-num=8,9,10,11 "Built target rime"
 .PHONY : CMakeFiles/rime.dir/all
 
 # Build rule for subdir invocation for target.
@@ -109,12 +109,12 @@ CMakeFiles/rime.dir/clean:
 CMakeFiles/rc.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target rc"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target rc"
 .PHONY : CMakeFiles/rc.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/rc.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles 6
+	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/rc.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /mnt/c/Users/param/Param/Programming/C++/rime/build/CMakeFiles 0
 .PHONY : CMakeFiles/rc.dir/rule

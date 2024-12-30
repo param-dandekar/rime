@@ -328,9 +328,6 @@ void func_return() {
 void set_start() {
   strncpy(labels[0].name, "_START", MAX_LABEL_LEN);
   labels[0].value = line_num;
-  for (int i = 0; i < PROGRAM_START_ADDR; i++) {
-    program[i] = (labels[0].value << (i*8)) & 0xFF;
-  }
 }
 
 // Error handling
@@ -366,6 +363,12 @@ int run_assembler(char *filename) {
   rewind(yyin);
 
   pass = SECOND;
+
+  for (int i = 0; i < PROGRAM_START_ADDR; i++) {
+    program[i] = (labels[0].value >> (i*8)) & 0xFF;
+  }
+  line_num = PROGRAM_START_ADDR + 1;
+  
   yyparse();
 
   /*

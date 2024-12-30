@@ -262,6 +262,30 @@ src/processor.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/rime.dir/build.make CMakeFiles/rime.dir/src/processor.cpp.s
 .PHONY : src/processor.cpp.s
 
+src/rime/assembler.o: src/rime/assembler.cpp.o
+.PHONY : src/rime/assembler.o
+
+# target to build an object file
+src/rime/assembler.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/src/rime/assembler.cpp.o
+.PHONY : src/rime/assembler.cpp.o
+
+src/rime/assembler.i: src/rime/assembler.cpp.i
+.PHONY : src/rime/assembler.i
+
+# target to preprocess a source file
+src/rime/assembler.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/src/rime/assembler.cpp.i
+.PHONY : src/rime/assembler.cpp.i
+
+src/rime/assembler.s: src/rime/assembler.cpp.s
+.PHONY : src/rime/assembler.s
+
+# target to generate assembly for a file
+src/rime/assembler.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rc.dir/build.make CMakeFiles/rc.dir/src/rime/assembler.cpp.s
+.PHONY : src/rime/assembler.cpp.s
+
 src/rime/main.o: src/rime/main.cpp.o
 .PHONY : src/rime/main.o
 
@@ -311,6 +335,9 @@ help:
 	@echo "... src/processor.o"
 	@echo "... src/processor.i"
 	@echo "... src/processor.s"
+	@echo "... src/rime/assembler.o"
+	@echo "... src/rime/assembler.i"
+	@echo "... src/rime/assembler.s"
 	@echo "... src/rime/main.o"
 	@echo "... src/rime/main.i"
 	@echo "... src/rime/main.s"

@@ -14,12 +14,14 @@
 extern FILE *yyin;
 
 typedef unsigned char byte_t;
+extern byte_t program[];
 
 #ifdef __cplusplus
+#include <string>
+int assemble(std::string input_file, std::string output_file);
 extern "C" {
 #endif
 int run_assembler(char *filename);
-
 #ifdef __cplusplus
 }
 #endif

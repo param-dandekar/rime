@@ -31,6 +31,12 @@
 },
 {
   "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
+  "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -std=gnu++17 -o CMakeFiles/rc.dir/src/rime/assembler.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/rime/assembler.cpp",
+  "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/rime/assembler.cpp",
+  "output": "CMakeFiles/rc.dir/src/rime/assembler.cpp.o"
+},
+{
+  "directory": "/mnt/c/Users/param/Param/Programming/C++/rime/build",
   "command": "/usr/bin/c++  -I/mnt/c/Users/param/Param/Programming/C++/rime/include/rime -I/mnt/c/Users/param/Param/Programming/C++/rime/build -ggdb -O0 -std=gnu++17 -o CMakeFiles/rc.dir/src/rime/main.cpp.o -c /mnt/c/Users/param/Param/Programming/C++/rime/src/rime/main.cpp",
   "file": "/mnt/c/Users/param/Param/Programming/C++/rime/src/rime/main.cpp",
   "output": "CMakeFiles/rc.dir/src/rime/main.cpp.o"
