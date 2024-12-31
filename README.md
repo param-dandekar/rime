@@ -106,7 +106,7 @@ The processor does nothing on this clock cycle, and goes ahead to the next instr
 **Resets the processor.**\
 All registers are set to 0. This has the effect of moving the execution of the program to the start.
 
-#### `SWR` : ___0 01__
+#### `SWR` : xxx0 01xx
 **Swap registers.**\
 The first three bits choose the first register:
 
@@ -125,11 +125,11 @@ If the last bit is 0, the second register is `A` and `C`; for 8-bit registers, `
 
 If bit 2 is set, the values of the registers are swapped. Otherwise, the value of register 1 is copied to register 2.
 
-#### `ADR` : ___0 1000
+#### `ADR` : xxx0 1000
 **Set address register.**\
 Stores the operand in the specified byte of the address register.
 
-#### `FLG` : __00 11__
+#### `FLG` : xx00 11xx
 **Operate on flag registers.**\
 Executes a bitwise AND, OR, or XOR on the flag register. The last two bits specify the operation:
 
@@ -139,15 +139,15 @@ Executes a bitwise AND, OR, or XOR on the flag register. The last two bits speci
 
 This can be used to set, clear, or flip flags.
 
-#### `PSH` : __01 0100
+#### `PSH` : xx01 0100
 **Push value to stack.**\
 This stores the operand to the top of the stack (the location pointed to by the stack pointer), and increments the stack pointer.
 
-#### `POP` : 00_1 0101
+#### `POP` : 00x1 0101
 **Pop value from stack.**\
 This stores the value of the top of the stack to the working register, and decrements the stack pointer.
 
-#### `STV` : ___1 0110
+#### `STV` : xxx1 0110
 **Store value from register.**\
 This stores the value of the working register to the specified location:
 - Stack addressing: the value is pushed to the top of the stack
@@ -155,43 +155,43 @@ This stores the value of the working register to the specified location:
 
 Immediate addressing is invalid for this instruciton and results in a NOP.
 
-#### `LDV` : ___1 0111
+#### `LDV` : xxx1 0111
 **Load value to register.**\
 The operand is loaded into the working register.
 
-#### `ADD` : ___1 1000
+#### `ADD` : xxx1 1000
 **Add without carry.**
 
-#### `ADC` : ___1 1001
+#### `ADC` : xxx1 1001
 **Add with carry.**
 
-#### `SUB` : ___1 1010
+#### `SUB` : xxx1 1010
 **Subtract without carry.**\
 This is also used for comparison of two numbers:
 - If the operand is smaller than the register, no flag is set
 - If the operand and register value are equal, the zero flag is set.
 - If the operand is larger than the register, the overflow flag is set.
 
-#### `SBC` : ___1 1011
+#### `SBC` : xxx1 1011
 **Subtract with carry.**
 
-#### `ORR` : ___1 1100
+#### `ORR` : xxx1 1100
 **Logical OR.**
 
-#### `AND` : ___1 1101
+#### `AND` : xxx1 1101
 **Logical AND.**
 
-#### `XOR` : ___1 1110
+#### `XOR` : xxx1 1110
 **Logical XOR.**
 
-#### `ROT` : ___1 1111
+#### `ROT` : xxx1 1111
 **Bit-shift, rotate, increment, or decrement.**\
 This instruction operates on the working register. Bits 6 and 7 of the instruction determine the action; bit 5 chooses the working register.
 
 - `bit 6`: 1 = right-shift/decrement, 0 = left-shift/increment
 - `bit 7`: 1 = shift/rotation, 0 = increment/decrement
 
-#### `JMP` : _010 0000
+#### `JMP` : x010 0000
 **Jump unconditionally.**
 
 #### `JNE` : 0010 0001
